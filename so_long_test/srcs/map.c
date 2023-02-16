@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlaw <nlaw@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 01:43:10 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/14 16:42:34 by nlaw             ###   ########.fr       */
+/*   Updated: 2023/02/16 21:35:43 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	load_map(t_data *data)
 		data->map.grid_test = 0;
 		while (*f && *f != '\n')
 		{
-			if (*f != 'C' || *f != 'E' || *f != 'P' || *f != '1' || *f != '0')
+			if (*f != 'C' && *f != 'E' && *f != 'P' && *f != '1' && *f != '0')
 				error_game(data, ERROR_MAP_INVALID, "map invalid");
 			if (data->map.grid_y == 0)
 				data->map.grid_x++;

@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 01:46:10 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/16 17:34:24 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/16 22:10:06 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,21 @@ int	close_game(int keycode, t_data *data)
 	ft_putendl_fd("Close Game", 1);
 	(void) data;
 	(void) keycode;
+	//free_sprts_util(data, data->bg);
+	//free_sprts_util(data, data->objs);
+	//free_sprts_util(data, data->panel.bg);
+	//free_sprts_util(data, data->panel.score);
+	//mlx_destroy_image(data->mlx, data->player.img.ptr);
+	//free_map_tiles(data);
+	/*if (data->map.filedata)
+		free(data->map.filedata);
+	if (IS_LINUX)
+	{
+		mlx_clear_window(data->mlx, data->win);
+		mlx_destroy_window(data->mlx, data->win);
+		mlx_destroy_display(data->mlx);
+	}
+	*/
 	exit(0);
 	return (0);
 }
