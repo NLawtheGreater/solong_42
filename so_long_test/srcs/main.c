@@ -3,8 +3,8 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*   Created: 2022/05/24 01:28:30 by tsomsa            #+#    #+#             */
 /*   Updated: 2023/02/16 17:35:18 by niclaw           ###   ########.fr       */
 /*                                                                            */

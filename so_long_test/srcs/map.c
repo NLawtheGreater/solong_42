@@ -33,8 +33,11 @@ void	load_map(t_data *data)
 	init_map_data(data, 1);
 	while (*f)
 	{
+		data->map.grid_test = 0;
 		while (*f && *f != '\n')
 		{
+			if (*f != 'C' || *f != 'E' || *f != 'P' || *f != '1' || *f != '0')
+				error_game(data, ERROR_MAP_INVALID, "map invalid");
 			if (data->map.grid_y == 0)
 				data->map.grid_x++;
 			if (*f == 'C')
@@ -43,12 +46,16 @@ void	load_map(t_data *data)
 				data->map.exit++;
 			else if (*f == 'P')
 				data->map.player++;
+			data->map.grid_test++;
 			f++;
 		}
+		if (data->map.grid_test != data->map.grid_x)
+			error_game(data, ERROR_MAP_INVALID, "map not a grid");
 		data->map.grid_y++;
 		f++;
 	}
 	init_map_data(data, 0);
+	
 	validate_map(data);
 }
 

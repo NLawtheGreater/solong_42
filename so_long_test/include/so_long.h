@@ -80,6 +80,7 @@ typedef struct s_map
 	int		height;
 	int		grid_x;
 	int		grid_y;
+	int		grid_test;
 	int		item;
 	int		exit;
 	int		player;

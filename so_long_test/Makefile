@@ -34,7 +34,7 @@ TESTER3		=
 TESTER4		=
 
 ### SO_LONG SPECIAL ###
-MAP = "test3.ber"
+MAP = "simple_mon.ber"
 UNAME = $(shell uname -s)
 ifeq ($(UNAME), Linux)
 	PLATFORM_SRC = game_Linux.c
@@ -48,8 +48,8 @@ ifeq ($(UNAME), Linux)
 				  -L/usr/lib 
 else
 	PLATFORM_SRC = game_Macos.c
-	MLX_DIR		= mlx
-	MLX_FLAGS	= -Lmlx -lmlx \
+	MLX_DIR		= mlx_opengl
+	MLX_FLAGS	= -L${MLX_DIR} -lmlx -lm -lz\
 				  -framework OpenGL \
 				  -framework AppKit
 	INCLUDES 	= -I$(HEAD) \
@@ -155,8 +155,8 @@ re:	fclean all
 test2:
 
 mem:	
-	valgrind -s --leak-check=full --show-leak-kinds=all ./$(NAME) $(MAP)
-
+	valgrind -s --leak-check=summary ./$(NAME) $(MAP)
+#--show-leak-kinds=all
 tester:
 
 norm:
