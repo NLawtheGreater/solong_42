@@ -16,7 +16,6 @@ void	load_game(t_data *data)
 {
 	data->objs = NULL;
 	data->bg = NULL;
-	data->enemies = NULL;
 	data->frame = 0;
 	grid_loop_util(data, &new_bg);
 	load_panel(data);
@@ -41,6 +40,7 @@ void	exit_game(t_data *data, int code)
 	free_sprts_util(data, data->objs);
 	free_sprts_util(data, data->panel.bg);
 	free_sprts_util(data, data->panel.score);
+	mlx_destroy_image(data->mlx, data->player.img.ptr);
 	if (data->map.filedata)
 		free(data->map.filedata);
 	if (IS_LINUX)
@@ -54,19 +54,27 @@ void	exit_game(t_data *data, int code)
 
 void	error_game(t_data *data, int code, char *msg)
 {
-	if (code == ERROR_FILE_OPEN || code == ERROR_MAP_INVALID)
-		ft_printf("Error: %s\n", msg);
-	else if (code == ERROR_MLX)
+	if (code == ERROR_FILE_OPEN || code == ERROR_MLX)
 	{
-		ft_printf("Error: MLX lib cannot operation\n");
+		ft_putstr_fd("Error: ", 1);
+		ft_putendl_fd(msg, 1);
 		free(data->mlx);
+		data->mlx = NULL;
+		exit(1);
+	}
+	else if (code == ERROR_MAP_INVALID)
+	{
+		ft_putstr_fd("Error: ", 1);
+		ft_putendl_fd(msg, 1);
 	}
 	else if (code == ERROR_WIN)
 	{
-		ft_printf("Error: MLX WIN lib cannoot operation\n");
-		free(data->mlx);
+		ft_putendl_fd("Error: Cannot run MLX WIN", 1);
 		free(data->win);
+	free_map_tiles(data);
 	}
+	free(data->mlx);
+	data->mlx = NULL;
 	free(data->map.filedata);
 	exit(1);
 }

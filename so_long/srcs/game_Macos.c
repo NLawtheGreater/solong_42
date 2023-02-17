@@ -16,14 +16,12 @@ void	load_game(t_data *data)
 {
 	data->objs = NULL;
 	data->bg = NULL;
-	data->enemies = NULL;
 	data->frame = 0;
 	grid_loop_util(data, &new_bg);
 	load_panel(data);
 	load_score(data);
 	grid_loop_util(data, &new_obj);
 	grid_loop_util(data, &new_player);
-	grid_loop_util(data, &new_enemy);
 }
 
 void	render_game(t_data *data)
@@ -33,6 +31,7 @@ void	render_game(t_data *data)
 	render_sprts_util(data, data->panel.score);
 	render_sprts_util(data, data->objs);
 	render_player(data);
+	/*check*/
 	mlx_string_put(data->mlx, data->win, 0, 0, 0x0FFF, "SO_LONG");
 }
 
@@ -52,26 +51,30 @@ void	exit_game(t_data *data, int code)
 
 void	error_game(t_data *data, int code, char *msg)
 {
-	if (code == ERROR_FILE_OPEN || code == ERROR_MAP_INVALID)
-		ft_printf("Error: %s\n", msg);
-	else if (code == ERROR_MLX)
+	if (code == ERROR_FILE_OPEN || code == ERROR_MLX)
 	{
-		ft_printf("Error: Cannot run MLX lib\n");
+		ft_printf("Error: %s\n", msg);
 		free(data->mlx);
+		data->mlx = NULL;
+		exit(1);
 	}
+	else if (code == ERROR_MAP_INVALID)
+		ft_printf("Error: %s\n", msg);
 	else if (code == ERROR_WIN)
 	{
-		ft_printf("Error: Cannot run MLX WIN lib\n");
-		free(data->mlx);
+		ft_printf("Error: Cannot run MLX WIN\n");
 		free(data->win);
+		free_map_tiles(data);
 	}
+	free(data->mlx);
+	data->mlx = NULL;
 	free(data->map.filedata);
 	exit(1);
 }
 
 int	close_game(int keycode, t_data *data)
 {
-	ft_printf("Close Game\n");
+	ft_printf("Close mainGame\n");
 	(void) data;
 	(void) keycode;
 	exit(0);

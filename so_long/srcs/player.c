@@ -14,14 +14,13 @@
 
 void	render_player(t_data *data)
 {
-	t_sprt	p;
+	/*t_sprt	p;
 
 	p = data->player;
 	if (p.act == ACT_HURTING)
 		player_hurting(data);
 	else if (p.act == ACT_WALK)
 	{
-		player_moving(data);
 		player_walking(data);
 	}
 	else if (p.act == ACT_INTERACT)
@@ -31,29 +30,10 @@ void	render_player(t_data *data)
 	else if (p.act == ACT_COLLECTED)
 		player_collecting(data);
 	else
-		player_switch_acting(data);
+		player_switch_acting(data);*/
+	player_move(data);
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->player.img.ptr, data->player.v.x, data->player.v.y);
-}
-
-void	check_player(t_data *data)
-{
-	t_sprt	p;
-	t_sprt	*e;
-
-	p = data->player;
-	if (p.act == ACT_SLEEP)
-		return ;
-	e = data->enemies;
-	while (e)
-	{
-		if (is_ovelap_tile(e->v, p.v, 0, 0))
-		{
-			if (p.act != ACT_HURTING && p.act != ACT_FALLEN)
-				player_hurting(data);
-		}
-		e = e->next;
-	}
 }
 
 void	check_object_player(t_data *data, t_tile t)
@@ -69,11 +49,46 @@ void	check_object_player(t_data *data, t_tile t)
 			{
 				mlx_destroy_image(data->mlx, obj->img.ptr);
 				obj->img.ptr = NULL;
-				data->player.act = ACT_COLLECTED;
 				data->player.item++;
 			}
 			return ;
 		}
 		obj = obj->next;
 	}
+	if (t.type == 'E')
+	{
+		if (data->map.item == data->player.item)
+			exit_game(data, EXIT_SUCCEED);
+	}
+}
+
+void	moving_handling(t_data *data, int dir)
+{
+	t_tile	nt;
+	t_vtr	mv;
+	t_vtr	nv;
+
+	data->player.face = dir;
+	mv = get_move_vtr(data->player.face, 0);
+	nv = add_vtr(data->player.v, mv);
+	nt = get_tile(data, nv);
+	if (nt.type == '1')
+		return ;
+	data->player.nv = nv;
+	data->player.v = nv;
+	data->player.moved++;
+	check_object_player(data, nt);
+
+	ft_printf("Move taken: %d\n", data->player.moved);
+	update_score(data);
+}
+
+void	player_move(t_data *data)
+{
+	t_sprt	p;
+	t_vtr	mv;
+
+	p = data->player;
+	mv = get_move_vtr(p.face, 1);
+	data->player.v = add_vtr(data->player.v, mv);
 }

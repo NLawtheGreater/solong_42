@@ -37,7 +37,7 @@ void	load_map(t_data *data)
 		while (*f && *f != '\n')
 		{
 			if (*f != 'C' && *f != 'E' && *f != 'P' && *f != '1' && *f != '0')
-				error_game(data, ERROR_MAP_INVALID, "map invalid");
+				error_game(data, ERROR_MAP_INVALID, "map has unidentified object or space");
 			if (data->map.grid_y == 0)
 				data->map.grid_x++;
 			if (*f == 'C')
@@ -50,12 +50,11 @@ void	load_map(t_data *data)
 			f++;
 		}
 		if (data->map.grid_test != data->map.grid_x)
-			error_game(data, ERROR_MAP_INVALID, "map not a grid");
+			error_game(data, ERROR_MAP_INVALID, "map not a rectangle");
 		data->map.grid_y++;
 		f++;
 	}
 	init_map_data(data, 0);
-	
 	validate_map(data);
 }
 

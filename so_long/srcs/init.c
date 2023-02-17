@@ -21,34 +21,12 @@ void	new_player(t_data *data, t_tile t)
 	p.type = t.type;
 	p.v = t.v;
 	p.nv = p.v;
-	p.animating = 0;
-	p.act = ACT_STAND;
-	p.face = DIRCT_DOWN;
 	p.item = 0;
 	p.moved = 0;
-	p.img = set_img(data, SPRITE_STAND_DOWN_PATH);
+	p.img = set_img(data, SPRITE_STAND_PATH);
 	data->player = p;
 }
 
-void	new_enemy(t_data *data, t_tile t)
-{
-	t_sprt	*e;
-
-	if (t.type != 'M')
-		return ;
-	e = malloc(sizeof(t_sprt));
-	e->v = t.v;
-	e->nv = t.v;
-	e->animating = 0;
-	e->act = ACT_STAND;
-	e->face = data->frame % 4 + 1;
-	e->next = NULL;
-	e->img = set_img(data, ENEMY_STAND_FRONT_PATH);
-	if (!data->enemies)
-		data->enemies = e;
-	else
-		add_sprt_list(data->enemies, e);
-}
 
 void	new_obj(t_data *data, t_tile t)
 {

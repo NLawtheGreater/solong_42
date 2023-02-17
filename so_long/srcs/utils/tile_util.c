@@ -32,7 +32,7 @@ t_tile	get_tile(t_data *data, t_vtr v)
  * @param o1 offset of Rect1
  * @param o2 offset of Rect2
  */
-int	is_ovelap_tile(t_vtr v1, t_vtr v2, int o1, int o2)
+/*int	is_ovelap_tile(t_vtr v1, t_vtr v2, int o1, int o2)
 {
 	int	ts;
 	int	w1;
@@ -52,9 +52,9 @@ int	is_ovelap_tile(t_vtr v1, t_vtr v2, int o1, int o2)
 	if ((v1.y + w1) < (v2.y + o2) || (v1.y + o1) > (v2.y + w2))
 		return (0);
 	return (1);
-}
+}*/
 
-t_tile	random_free_tile(t_data *data, int r, int t)
+/*t_tile	random_free_tile(t_data *data, int r, int t)
 {
 	t_tile	**tiles;
 	t_tile	ft;
@@ -79,4 +79,4 @@ t_tile	random_free_tile(t_data *data, int r, int t)
 		gy++;
 	}
 	return (ft);
-}
+}*/

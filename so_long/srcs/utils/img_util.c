@@ -19,12 +19,11 @@ t_img	set_img(t_data *data, char *path)
 	char	*fpath;
 
 	if (TILE_SIZE == 32)
-		dir = "images/sprites_32x32/";
+		dir = "asset/sprites_32/";
 	else
-		dir = "images/sprites_64x64/";
+		dir = "asset/sprites_64/";
 	fpath = ft_strjoin(dir, path);
-	/*check*/
-	img.mlx = mlx_xpm_file_to_image(data->mlx, fpath, &img.w, &img.h);
+	img.ptr = mlx_xpm_file_to_image(data->mlx, fpath, &img.w, &img.h);
 	free(fpath);
 	return (img);
 }
@@ -32,7 +31,7 @@ t_img	set_img(t_data *data, char *path)
 t_img	get_number_img(t_data *data, char c, t_img *img)
 {
 	if (img)
-		mlx_destroy_image(data->mlx, img->mlx);
+		mlx_destroy_image(data->mlx, img->ptr);
 	if (c == '0')
 		return (set_img(data, TEXT_NUMBER_0));
 	if (c == '1')

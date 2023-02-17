@@ -157,7 +157,7 @@ void	update_score(t_data *data);
 
 t_tile	get_tile(t_data *data, t_vtr v);
 t_tile	random_free_tile(t_data *data, int r, int t);
-int		is_ovelap_tile(t_vtr v1, t_vtr v2, int o1, int o2);
+int		is_overlap_tile(t_vtr v1, t_vtr v2, int o1, int o2);
 
 t_vtr	set_vtr(int x, int y);
 t_vtr	add_vtr(t_vtr v1, t_vtr v2);

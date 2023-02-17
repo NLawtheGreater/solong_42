@@ -21,16 +21,7 @@ t_vtr	set_vtr(int x, int y)
 	return (v);
 }
 
-t_vtr	add_vtr(t_vtr v1, t_vtr v2)
-{
-	t_vtr	v3;
-
-	v3.x = v1.x + v2.x;
-	v3.y = v1.y + v2.y;
-	return (v3);
-}
-
-t_vtr	get_move_vtr(int drct, int msize)
+t_vtr	get_move_vtr(int dir, int msize)
 {
 	t_vtr	v;
 	int		m;
@@ -41,13 +32,22 @@ t_vtr	get_move_vtr(int drct, int msize)
 		m = TILE_SIZE;
 	else
 		m = msize * TILE_SIZE / 32;
-	if (drct == DIRCT_LEFT)
+	if (dir == DIR_LEFT)
 		v.x = m * -1;
-	if (drct == DIRCT_RIGHT)
+	if (dir == DIR_RIGHT)
 		v.x = m;
-	if (drct == DIRCT_UP)
+	if (dir == DIR_UP)
 		v.y = m * -1;
-	if (drct == DIRCT_DOWN)
+	if (dir == DIR_DOWN)
 		v.y = m;
 	return (v);
+}
+
+t_vtr	add_vtr(t_vtr v1, t_vtr v2)
+{
+	t_vtr	v3;
+
+	v3.x = v1.x + v2.x;
+	v3.y = v1.y + v2.y;
+	return (v3);
 }

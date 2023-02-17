@@ -32,14 +32,12 @@ void	validate_map(t_data *data)
 
 	m = data->map;
 	if (m.grid_x * m.grid_y < 4 * 4)
-		error_game(data, ERROR_MAP_INVALID, "Map too small.");
+		error_game(data, ERROR_MAP_INVALID, "map too small.");
 	/*check*/
-	if (ft_strlen(m.filedata) != m.grid_x * m.grid_y + m.grid_y - 1)
-		error_game(data, ERROR_MAP_INVALID, "Map shape wrong.");
 	if (m.item == 0 || m.player == 0 || m.exit != 1)
-		error_game(data, ERROR_MAP_INVALID, "Minimum map requirement not met");
+		error_game(data, ERROR_MAP_INVALID, "minimum map requirement not met");
 	if (valid_wall(data->map) == 0)
-		error_game(data, ERROR_MAP_INVALID, "Map not covered with wall");
+		error_game(data, ERROR_MAP_INVALID, "map not covered with wall");
 }
 
 static int	valid_wall(t_map map)
@@ -69,4 +67,38 @@ static int	valid_wall(t_map map)
 		y++;
 	}
 	return (1);
+}
+
+int	valid_path(t_data *data)
+{
+	t_data	tmp;
+	int		x;
+	int		y;
+
+	y = 0;
+	while (y < data->map.grid_y)
+	{
+		x = 0;
+		while(x < data->map.grid_x)
+		{
+			if(data->map.tiles[y][x].type == 'P')
+			{
+				prefill (&tmp, data);
+				fill (&tmp, y, x);
+				if (fill_check (&tmp, data) == 0)
+				{
+					free_map_tiles(&tmp);
+					return (0);
+				}
+				else
+				{
+					free_map_tiles(&tmp);
+					return (1);
+				}
+			}
+			x++;
+		}
+		y++;
+	}
+	return (0);
 }

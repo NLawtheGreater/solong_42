@@ -14,7 +14,6 @@
 
 static int	render(t_data *data);
 static int	keyhandler(int keycode, t_data *data);
-static int	rkeyhandler(int keycode, t_data *data);
 static void	initiate(t_data *data, char *filename);
 
 int	main(int argc, char **argv)
@@ -40,11 +39,15 @@ static void	initiate(t_data *data, char *filename)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
-		error_game(data, ERROR_MLX, NULL);
+		error_game(data, ERROR_MLX, "Cannot load MLX");
 	load_file(data, filename);
 	load_map(data);
-	/*check*/
 	load_tiles(data);
+	if (valid_path(data) == 0)
+	{
+		free_map_tiles(data);
+		error_game(data, ERROR_MAP_INVALID, "Map has invalid path");
+	}
 	data->win = mlx_new_window(data->mlx, data->w, data->h, "SO LONG");
 	if (!data->win)
 		error_game(data, ERROR_WIN, NULL);
@@ -53,12 +56,6 @@ static void	initiate(t_data *data, char *filename)
 
 static int	render(t_data *data)
 {
-	if (data->frame == FRAME_RATE)
-	{
-		data->frame = 0;
-	}
-	else
-		data->frame += 1;
 	render_game(data);
 	return (0);
 }
@@ -66,21 +63,14 @@ static int	render(t_data *data)
 static int	keyhandler(int keycode, t_data *data)
 {
 	if (keycode == KEY_LEFT || keycode == KEY_A)
-		moving_handling(data, DIRCT_LEFT);
+		moving_handling(data, DIR_LEFT);
 	if (keycode == KEY_RIGHT || keycode == KEY_D)
-		moving_handling(data, DIRCT_RIGHT);
+		moving_handling(data, DIR_RIGHT);
 	if (keycode == KEY_DOWN || keycode == KEY_S)
-		moving_handling(data, DIRCT_DOWN);
+		moving_handling(data, DIR_DOWN);
 	if (keycode == KEY_UP || keycode == KEY_W)
-		moving_handling(data, DIRCT_UP);
+		moving_handling(data, DIR_UP);
 	if (keycode == KEY_ESC)
 		exit_game(data, EXIT_SUCCEED);
 	return (0);
 }
-
-/*static int	rkeyhandler(int keycode, t_data *data)
-{
-	if (keycode == KEY_CTRL)
-		ctrl_handling(data, 1);
-	return (0);
-}*/

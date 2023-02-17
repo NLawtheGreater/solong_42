@@ -43,7 +43,7 @@ static char	*read_file(t_data *data, char *filename)
 	buf = ft_calloc((BUF_SIZE + 1), sizeof(char));
 	file = ft_calloc(sizeof(char), 10000);
 	count = read(fd, buf, BUF_SIZE);
-	while (ret)
+	while (count)
 	{
 		buf[count] = '\0';
 		ft_strcat(file, buf);
@@ -64,8 +64,6 @@ static char	*ft_strcat(char *dest, char *src)
 	while (*src)
 	{
 		*(dest + i++) = *src++;
-		//i++;
-		//src++;
 	}
 	*(dest + i) = '\0';
 	return (dest);
