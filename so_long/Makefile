@@ -23,6 +23,7 @@ BONUS_DIR	= bonus/
 HEAD		= include/
 SHARE_DIR	= share/
 LIB_DIR		= libft/
+PRINT_DIR	= ft_printf/
 BUILD =	./build/
 
 ### TESTER GIT URL ###
@@ -42,6 +43,7 @@ ifeq ($(UNAME), Linux)
 	MLX_FLAGS	= -L${MLX_DIR} -lmlx_Linux -lXext -lX11 -lm -lz
 	INCLUDES 	= -I$(HEAD) \
 				  -I$(LIB_DIR) \
+				  -I$(PRINT_DIR)\
 				  -I/usr/include\
 				  -I${MLX_DIR}
 	LIBS		= -L$(LIB_DIR) -lft \
@@ -54,8 +56,9 @@ else
 				  -framework AppKit
 	INCLUDES 	= -I$(HEAD) \
 				  -I$(LIB_DIR) \
+				  -I$(PRINT_DIR)\
 				  -I$(MLX_DIR)
-	LIBS		= -L$(LIB_DIR) -lft
+	LIBS		= -L$(LIB_DIR) -lft -L$(PRINT_DIR)
 endif
 
 ### SOURCE FILE ###
@@ -122,6 +125,7 @@ build:
 ${NAME}:	${OBJS} ${SHARE_OBJS} ${LIB_DIR} $(MLX_DIR)
 	make -C ${LIB_DIR}
 	make -C ${MLX_DIR}	 
+	make -C ${PRINT_DIR}	 
 	${CC} ${CFLAGS} ${addprefix ${BUILD}, ${OBJS}} ${addprefix ${BUILD}, ${SHARE_OBJS}}\
 	 ${LIBS} $(MLX_FLAGS) -o ${NAME}
 	@echo "$(GREEN) $@ Linking done!$(NOC)" 
