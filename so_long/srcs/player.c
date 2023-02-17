@@ -79,7 +79,8 @@ void	moving_handling(t_data *data, int dir)
 	data->player.moved++;
 	check_object_player(data, nt);
 
-	ft_printf("Move taken: %d\n", data->player.moved);
+	/*check*/
+	printf("Move taken: %d\n", data->player.moved);
 	update_score(data);
 }
 

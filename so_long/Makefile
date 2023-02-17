@@ -58,7 +58,8 @@ else
 				  -I$(LIB_DIR) \
 				  -I$(PRINT_DIR)\
 				  -I$(MLX_DIR)
-	LIBS		= -L$(LIB_DIR) -lft -L$(PRINT_DIR)
+	LIBS		= -L$(LIB_DIR) -lft\
+				-L$(PRINT_DIR) -lftprintf
 endif
 
 ### SOURCE FILE ###
@@ -87,6 +88,7 @@ SHARE_OBJS	= ${SHARE_SRCS:.c=.o}
 
 ## LIBFT TARGET ##
 LIBFT	= ${LIB_DIR}libft.a
+PRINT	= ${PRINT_DIR}libftprintf.a
 
 ### COMPILATION ###
 # the compilation flag that will we will use for the project
@@ -127,7 +129,7 @@ ${NAME}:	${OBJS} ${SHARE_OBJS} ${LIB_DIR} $(MLX_DIR)
 	make -C ${MLX_DIR}	 
 	make -C ${PRINT_DIR}	 
 	${CC} ${CFLAGS} ${addprefix ${BUILD}, ${OBJS}} ${addprefix ${BUILD}, ${SHARE_OBJS}}\
-	 ${LIBS} $(MLX_FLAGS) -o ${NAME}
+	 $(PRINT_DIR)libftprintf.a ${LIBS} $(MLX_FLAGS) -o ${NAME}
 	@echo "$(GREEN) $@ Linking done!$(NOC)" 
 
 
@@ -136,6 +138,7 @@ all: ${NAME}
 libs:
 	make -C ${LIB_DIR}
 	make -C ${MLX_DIR}
+	make -C ${PRINT_DIR}
 
 bonus:	${BONUS_OBJS} ${SHARE_OBJS} ${LIBFT}
 	@${CC} ${CFLAGS} ${addprefix ${BUILD}, ${BONUS_OBJS}} ${addprefix ${BUILD}, ${SHARE_OBJS}}\

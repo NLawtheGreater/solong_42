@@ -80,7 +80,7 @@ char	*set_format2(char *format, char c, int i)
 	if (!format)
 		format = (char *) ft_calloc(sizeof(char), i + 2);
 	else
-		format = (char *) ft_realloc(format, i + 2);
+		format = (char *) realloc(format, i + 2);
 	if (!format)
 		return (NULL);
 	format[i] = c;

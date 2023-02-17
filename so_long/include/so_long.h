@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <mlx.h>
 # include "libft.h"
+# include "ft_printf.h"
 # include "game.h"
 # include "keys.h"
 # include "sprite.h"

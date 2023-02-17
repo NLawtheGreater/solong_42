@@ -37,7 +37,7 @@ void	render_game(t_data *data)
 
 void	exit_game(t_data *data, int code)
 {
-	ft_printf("Exit Game\n");
+	ft_putendl_fd("Exit Game", 1);
 	free_sprts_util(data, data->bg);
 	free_sprts_util(data, data->objs);
 	free_sprts_util(data, data->panel.bg);
@@ -51,18 +51,19 @@ void	exit_game(t_data *data, int code)
 
 void	error_game(t_data *data, int code, char *msg)
 {
+	ft_putstr_fd(msg, 15);
 	if (code == ERROR_FILE_OPEN || code == ERROR_MLX)
 	{
-		ft_printf("Error: %s\n", msg);
+		ft_putendl_fd("Error: %s\n", 1);
 		free(data->mlx);
 		data->mlx = NULL;
 		exit(1);
 	}
 	else if (code == ERROR_MAP_INVALID)
-		ft_printf("Error: %s\n", msg);
+		ft_putendl_fd("Error: %s\n", 1);
 	else if (code == ERROR_WIN)
 	{
-		ft_printf("Error: Cannot run MLX WIN\n");
+		ft_putendl_fd("Error: Cannot run MLX WIN\n", 1);
 		free(data->win);
 		free_map_tiles(data);
 	}
@@ -74,7 +75,7 @@ void	error_game(t_data *data, int code, char *msg)
 
 int	close_game(int keycode, t_data *data)
 {
-	ft_printf("Close mainGame\n");
+	ft_putendl_fd("Close mainGame\n", 1);
 	(void) data;
 	(void) keycode;
 	exit(0);
