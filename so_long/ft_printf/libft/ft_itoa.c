@@ -3,68 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/24 14:06:57 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/02/24 14:06:59 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/09/02 17:14:42 by niclaw            #+#    #+#             */
+/*   Updated: 2022/09/02 17:14:44 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+/* Synopsis:
+	Represent integer as string
+** Description:
+	Allocates (with malloc(3)) and returns a string
+**  representing the integer received as an argument.
+**  Negative numbers must be handled.*/
 #include "libft.h"
+#include <stdio.h>
 
-static int	count_pos(long n);
-static char	*create_number(char *str, long x, int m);
-
-char	*ft_itoa(int n)
+/*check if n is 0, only one char needed
+**check if n is negative, add char count if negative
+**check char count with n/10 loop*/
+static int	ft_count(int n)
 {
-	int		m;
-	long	x;
-	char	*str;
+	int	i;
 
-	x = (long) n;
-	m = count_pos(n);
-	if (n >= 0)
-		str = malloc(sizeof(char) * m + 1);
-	else
-		str = malloc(sizeof(char) * ++m + 1);
-	if (!str)
-		return (NULL);
-	str[0] = 0;
-	if (n < 0)
-	{
-		str[0] = '-';
-		x = x * -1;
-	}
-	str = create_number(str, x, m);
-	return (str);
-}
-
-static char	*create_number(char *str, long x, int m)
-{
-	str[m--] = '\0';
-	if (x == 0)
-		str[0] = '0';
-	while (x > 0)
-	{
-		str[m--] = (x % 10) + '0';
-		x /= 10;
-	}
-	return (str);
-}
-
-static int	count_pos(long n)
-{
-	int		i;
-
-	i = 0;
 	if (n == 0)
 		return (1);
-	if (n < 0)
-		n *= -1;
-	while (n > 0)
+	i = (n < 0);
+	while (n != 0)
 	{
-		n /= 10;
+		n = n / 10;
 		i++;
 	}
 	return (i);
+}
+
+/*	1.count char amount
+	2.malloc with char count and check
+	3.add null
+	4.check negative sign, add negative sign accordingly
+	5.copy unsigned version of n, with if negative check
+	6.loop and record int into string, using ASCII representation 
+		of int. Use BOOLEAN result of negative n to control loop
+*/
+char	*ft_itoa(int n)
+{
+	int				i;
+	unsigned int	cp;
+	char			*res;
+
+	i = ft_count(n) - 1;
+	res = malloc(sizeof(char) * (i + 2));
+	if (!res)
+		return (NULL);
+	res[i + 1] = '\0';
+	if (n < 0)
+		res[0] = '-';
+	if (n < 0)
+		cp = -1 * n;
+	else
+		cp = n;
+	while (i >= (n < 0))
+	{
+		res[i] = (cp % 10) + '0';
+		cp /= 10;
+		i--;
+	}
+	return (res);
 }

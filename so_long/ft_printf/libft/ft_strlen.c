@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                           :+:      :+:    :+:*/
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 14:50:37 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/02/22 14:51:35 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/06/17 20:56:05 by niclaw            #+#    #+#             */
+/*   Updated: 2022/06/17 21:12:58 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
+#include <stdio.h>
 
-int	ft_strlen(const char *str)
+size_t	ft_strlen(char const *str)
 {
-	int	i;
+	int	len;
 
-	i = 0;
-	while (*str++ != '\0')
-		i++;
-	return (i);
+	len = 0;
+	while (*str != '\0')
+	{
+		str++;
+		len++;
+	}
+	return (len);
 }
+/*int main()
+{
+	char 	x[] = "Thereis19characters";
+	
+	printf("%d", ft_strlen(x));
+}
+*/
