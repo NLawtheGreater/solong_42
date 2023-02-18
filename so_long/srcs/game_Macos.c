@@ -70,7 +70,7 @@ void	error_game(t_data *data, int code, char *msg)
 	exit(1);
 }
 
-int	close_game(int keycode, t_data *data)
+int	close_game(t_data *data, int keycode)
 {
 	(void) data;
 	(void) keycode;
