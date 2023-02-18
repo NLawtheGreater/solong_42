@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   panel.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 22:59:32 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/05/28 22:59:34 by tsomsa           ###   ########.fr       */
+/*   Updated: 2023/02/18 20:37:32 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	load_panel(t_data *data)
 	int		gy;
 	t_sprt	*bg;
 
-	gx = 0;
+	gx = 5;
 	gy = data->map.grid_y;
 	bg = data->panel.bg;
 	data->panel.h = data->bsize;
@@ -28,7 +28,7 @@ void	load_panel(t_data *data)
 	data->panel.v.x = 0;
 	data->panel.v.y = data->map.height;
 	data->panel.bg = NULL;
-	while (gx < data->map.grid_x)
+	/*while (gx < data->map.grid_x)
 	{
 		bg = malloc(sizeof(t_sprt));
 		bg->img = set_img(data, OBJECT_GRASS_PATH);
@@ -40,7 +40,8 @@ void	load_panel(t_data *data)
 		else
 			add_sprt_list(data->panel.bg, bg);
 		gx++;
-	}
+	}*/
+	mlx_string_put(data->mlx, data->win, data->panel.v.x + 10, data->panel.v.y + 20, 0x8B008B,"Sprites by trevor-pupkin.itch.io");
 }
 
 void	load_score(t_data *data)
