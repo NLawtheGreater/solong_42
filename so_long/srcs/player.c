@@ -31,6 +31,7 @@ void	render_player(t_data *data)
 		player_collecting(data);
 	else
 		player_switch_acting(data);*/
+	mlx_destroy_image(data->mlx, data->player.img.ptr);
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->player.img.ptr, data->player.v.x, data->player.v.y);
 }
