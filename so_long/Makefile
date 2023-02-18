@@ -6,7 +6,7 @@
 #    By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/24 13:59:17 by niclaw            #+#    #+#              #
-#    Updated: 2023/02/16 22:12:05 by niclaw           ###   ########.fr        #
+#    Updated: 2023/02/18 14:29:46 by niclaw           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ TESTER3		=
 TESTER4		=
 
 ### SO_LONG SPECIAL ###
-MAP = "test7.ber"
+MAP = 
 UNAME = $(shell uname -s)
 ifeq ($(UNAME), Linux)
 	PLATFORM_SRC = game_Linux.c
@@ -94,7 +94,7 @@ PRINT	= ${PRINT_DIR}libftprintf.a
 # the compilation flag that will we will use for the project
 
 CC	= gcc
-CFLAGS	= -g -Wall -Wextra -Werror
+CFLAGS	= -g -Wall -Wextra
 RM	= rm -f
 
 ### COLORS ###

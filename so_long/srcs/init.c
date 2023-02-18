@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlaw <nlaw@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 23:02:31 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/13 22:44:23 by nlaw             ###   ########.fr       */
+/*   Updated: 2023/02/18 13:50:54 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	new_player(t_data *data, t_tile t)
 	p.nv = p.v;
 	p.item = 0;
 	p.moved = 0;
+	p.face = DIR_RIGHT;
 	p.img = set_img(data, SPRITE_STAND_PATH);
 	data->player = p;
 }

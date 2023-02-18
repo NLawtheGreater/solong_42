@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlaw <nlaw@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 22:59:11 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/14 17:25:13 by nlaw             ###   ########.fr       */
+/*   Updated: 2023/02/18 13:54:31 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	render_player(t_data *data)
 		player_collecting(data);
 	else
 		player_switch_acting(data);*/
-	player_move(data);
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->player.img.ptr, data->player.v.x, data->player.v.y);
 }
@@ -82,6 +81,7 @@ void	moving_handling(t_data *data, int dir)
 	/*check*/
 	printf("Move taken: %d\n", data->player.moved);
 	update_score(data);
+	player_move(data);
 }
 
 void	player_move(t_data *data)

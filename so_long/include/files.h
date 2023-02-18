@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 01:25:08 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/15 21:01:29 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/18 14:01:21 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@
 # define OBJECT_ITEM_PATH			"help.xpm"
 # define OBJECT_GRASS_PATH			"grass.xpm"
 # define OBJECT_EXIT_PATH			"boat.xpm"
-# define SPRITE_STAND_PATH		"player.xpm"
+# define SPRITE_STAND_PATH			"player.xpm"
 #endif

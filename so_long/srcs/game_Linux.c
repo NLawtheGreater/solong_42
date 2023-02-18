@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_Linux.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlaw <nlaw@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 01:46:10 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/14 20:07:49 by nlaw             ###   ########.fr       */
+/*   Updated: 2023/02/18 13:40:17 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	render_game(t_data *data)
 
 void	exit_game(t_data *data, int code)
 {
-	ft_printf("Exit Game\n");
+	ft_putendl_fd("Exit Game", 1);
 	free_sprts_util(data, data->bg);
 	free_sprts_util(data, data->objs);
 	free_sprts_util(data, data->panel.bg);
@@ -81,7 +81,7 @@ void	error_game(t_data *data, int code, char *msg)
 
 int	close_game(int keycode, t_data *data)
 {
-	ft_printf("Close Game\n");
+	ft_putendl_fd("Close Game\n", 1);
 	(void) data;
 	(void) keycode;
 	exit(0);

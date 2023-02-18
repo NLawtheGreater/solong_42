@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlaw <nlaw@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 08:13:55 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/14 17:20:28 by nlaw             ###   ########.fr       */
+/*   Updated: 2023/02/18 13:59:37 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdlib.h>
 # include <mlx.h>
 # include "libft.h"
-# include "ft_printf.h"
 # include "game.h"
 # include "keys.h"
 # include "sprite.h"

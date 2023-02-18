@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   img_util.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlaw <nlaw@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 01:57:25 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/13 22:35:38 by nlaw             ###   ########.fr       */
+/*   Updated: 2023/02/18 14:29:25 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_img	set_img(t_data *data, char *path)
 
 t_img	get_number_img(t_data *data, char c, t_img *img)
 {
-	if (img)
-		mlx_destroy_image(data->mlx, img->ptr);
+//	if (img)
+//		mlx_destroy_image(data->mlx, img->ptr);
 	if (c == '0')
 		return (set_img(data, TEXT_NUMBER_0));
 	if (c == '1')
