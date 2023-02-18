@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 22:59:32 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/18 20:37:32 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/18 20:54:06 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,6 @@ void	load_panel(t_data *data)
 	data->panel.v.x = 0;
 	data->panel.v.y = data->map.height;
 	data->panel.bg = NULL;
-	/*while (gx < data->map.grid_x)
-	{
-		bg = malloc(sizeof(t_sprt));
-		bg->img = set_img(data, OBJECT_GRASS_PATH);
-		bg->v.x = gx * data->bsize;
-		bg->v.y = gy * data->bsize;
-		bg->next = NULL;
-		if (!data->panel.bg)
-			data->panel.bg = bg;
-		else
-			add_sprt_list(data->panel.bg, bg);
-		gx++;
-	}*/
 	mlx_string_put(data->mlx, data->win, data->panel.v.x + 10, data->panel.v.y + 20, 0x8B008B,"Sprites by trevor-pupkin.itch.io");
 }
 
