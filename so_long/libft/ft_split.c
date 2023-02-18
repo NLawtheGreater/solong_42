@@ -3,95 +3,126 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 22:51:42 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/02/23 22:51:44 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/09/02 17:16:56 by niclaw            #+#    #+#             */
+/*   Updated: 2022/09/02 17:16:58 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+/*
+** LIBRARY: N/A
+** SYNOPSIS: split string, with specified character as delimiter, into an array
+**			of strings
+**
+** DESCRIPTION:
+** 		Allocates (with malloc(3)) and returns an array of strings obtained by
+**	splitting ’s’ using the character ’c’ as a delimiter. The array must be
+**	ended by a NULL pointer.
+*/
 #include "libft.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-static int	setlen(char const *s, char c);
-static char	*setstr(char *dest, char const *src, int len);
-static int	detlen(char const *s, char c);
-static int	fitlen(char const *s, char c);
+/*	1.look through string
+	2.check if it is not like c & switch is off
+	3.turn switch on, count word
+	4.finds c, turns switch off
+	*check why cannot use memmove or strlcpy??*
+*/
+static int	count_words(const char *str, char c)
+{
+	int	count;
+	int	trig;
 
+	count = 0;
+	trig = 0;
+	while (*str)
+	{
+		if (*str != c && trig == 0)
+		{
+			trig = 1;
+			count++;
+		}
+		else if (*str == c)
+			trig = 0;
+		str++;
+	}
+	return (count);
+}
+
+static char	*word_dup(const char *str, int start, int finish)
+{
+	char	*word;
+	int		i;
+
+	i = 0;
+	word = malloc((finish - start + 1) * sizeof(char));
+	while (start < finish)
+		word[i++] = str[start++];
+	word[i] = '\0';
+	return (word);
+}
+
+/*	1.Search through s using index i
+	2.look for the first instance s[i] is unequal to c: the start of the word.
+		switch turns on and record position of start of word
+	3.look for the first instances[i] is equal to c (check switch 
+		for on): the end of the word.
+	4.record the word into split with (*check 2d array) 
+	5.switch turns off
+				6.*closes 2d array with NULL, necessary?
+*/	
 char	**ft_split(char const *s, char c)
 {
-	char	**arr;
-	int		i;
-	int		j;
-	int		len;
-	int		slen;
+	size_t	i;
+	size_t	j;
+	int		trig;
+	char	**split;
 
-	slen = ft_strlen(s);
-	arr = malloc(sizeof(char *) * (fitlen(s, c) + 1));
-	if (!arr)
+	split = (char **)malloc(sizeof(char *) * \
+		(count_words(s, c) + 1));
+	if (!s || !split)
 		return (NULL);
+	split[count_words(s, c)] = NULL;
 	i = 0;
-	j = detlen(&s[0], c);
-	while (s[j] && j <= slen)
+	j = 0;
+	trig = -1;
+	while (i <= ft_strlen(s))
 	{
-		len = setlen(&s[j], c);
-		arr[i] = malloc(sizeof(char) * len + 1);
-		if (!arr[i])
-			return (NULL);
-		*arr[i] = 0;
-		arr[i] = setstr(arr[i], &s[j], len);
-		i++;
-		j += len + detlen(&s[j + len], c);
-	}
-	arr[i] = NULL;
-	return (arr);
-}
-
-static int	fitlen(char const *s, char c)
-{
-	int	i;
-
-	i = 0;
-	while (*s)
-	{
-		if (*s != c)
+		if (s[i] != c && trig < 0)
+			trig = i;
+		else if ((s[i] == c || i == ft_strlen(s)) && trig >= 0)
 		{
-			i++;
-			while (*s != c && *s)
-				s++;
-			s--;
+			split[j++] = word_dup(s, trig, i);
+			trig = -1;
 		}
-		s++;
+		i++;
 	}
-	return (i);
+	return (split);
 }
+/*
+#include <stdio.h>
 
-static int	setlen(char const *s, char c)
+void	print_words(char **words)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] && s[i] != c)
-		i++;
-	return (i);
+	while (*words != NULL)
+	{
+		printf("'%s'\n", *words);
+		words++;
+	}
 }
 
-static int	detlen(char const *s, char c)
+void	test(char *str, char *charset)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] == c && s[i])
-		i++;
-	return (i);
+	//print argument 1 and 2
+	printf("%s\n%s\n", str, charset);
+	//print split array 1 row at a time
+	print_words(ft_split(str, charset));
 }
 
-static char	*setstr(char *dest, char const *src, int len)
+int	main(void)
 {
-	int	i;
-
-	i = 0;
-	while (i < len)
-		dest[i++] = *src++;
-	dest[i] = '\0';
-	return (dest);
+	test("God is,great.AND#ALMIGHTY$over%the^cat&ises*", "., !@#$%^&*()");
+	return (0);
 }
+*/

@@ -3,32 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 21:44:54 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/02/23 21:44:56 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/09/02 17:17:51 by niclaw            #+#    #+#             */
+/*   Updated: 2022/09/02 17:17:52 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+/*SYNOPSIS:
+	Return a new string
+**DESCRIPTION:
+	Allocates (with malloc(3)) and returns a new
+	string, which is the result of the concatenation
+	of ’s1’ and ’s2’.*/
 #include "libft.h"
+#include<stdio.h>
 
+/*1.malloc ptr with size of s1+s2
+**2.return NULL if allocation fail
+**3.copy s1 to ptr with for loop, same positions with i
+**4.continue to copy s2 to ptr with for loop
+**5.NULL terminate string
+**6.return new string
+*/
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*str;
+	char	*ptr;
 	int		i;
-	int		len1;
-	int		len2;
+	int		k;
 
-	i = 0;
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	str = malloc(sizeof(char) * (len1 + len2 + 1));
-	if (!str)
+	ptr = malloc(sizeof(char) * (ft_strlen(s1)+ft_strlen(s2) + 1));
+	if (!ptr)
 		return (NULL);
-	while (i < len1)
-		str[i++] = *s1++;
-	while (i < len1 + len2)
-		str[i++] = *s2++;
-	str[i] = '\0';
-	return (str);
+	i = 0;
+	while (s1[i])
+	{
+		ptr[i] = s1[i];
+		i++;
+	}
+	k = 0;
+	while (s2[k])
+	{
+		ptr[i] = s2[k];
+		k++;
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
 }
+
+/*#include<stdio.h>
+int	main(void)
+{
+	char	*tab[0];
+	char	*k[20];	
+
+	printf("%s", ft_strjoin(0, tab, "\t|\t"));
+	free(tab);
+	return (0);
+}*/

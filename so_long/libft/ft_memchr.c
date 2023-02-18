@@ -3,28 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 21:38:31 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/02/22 21:38:33 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/09/02 17:14:56 by niclaw            #+#    #+#             */
+/*   Updated: 2022/09/02 17:14:58 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-void	*ft_memchr(const void *str, int c, size_t n)
+/*1.converting c into unsigned char
+**2.go through *s from beginning
+**3.check for c (character) 
+**4.return matching pointer
+**5.not finding, return NULL*/
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char	*buf;
-	size_t			i;
+	size_t			ind;
+	unsigned char	check;
 
-	i = 0;
-	buf = (unsigned char *) str;
-	while (i < n && buf)
+	check = c;
+	ind = 0;
+	while (ind < n)
 	{
-		if (*buf == (unsigned char) c)
-			return ((unsigned char *) buf);
-		buf++;
-		i++;
+		if (*(unsigned char *)(s + ind) == check)
+			return ((void *)(s + ind));
+		ind++;
 	}
 	return (NULL);
 }

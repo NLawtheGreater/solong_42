@@ -3,24 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 21:28:55 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/02/22 21:28:57 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/09/02 17:17:09 by niclaw            #+#    #+#             */
+/*   Updated: 2022/09/02 17:17:11 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*  1.start looking and moving through *str 1-by-1 until *str=NULL
+    2.Checking whether c is like str, if found return that location in str
+    3.c not found return NULL*/
+
 char	*ft_strchr(const char *str, int c)
 {
-	while (*str != '\0')
+	char	check;
+
+	check = (char)c;
+	while (*str && check != *str)
 	{
-		if (*str == (char) c)
-			return ((char *) str);
 		str++;
 	}
-	if ((char) c == *str)
-		return ((char *) str);
+	if (check == *str)
+		return ((char *)(str));
 	return (NULL);
 }
+//for ( ind1 = 0; !str[ind1]; ind1++)

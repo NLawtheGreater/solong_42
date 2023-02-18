@@ -1,44 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 18:21:22 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/02/22 18:21:24 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/09/02 17:18:42 by niclaw            #+#    #+#             */
+/*   Updated: 2022/09/02 17:18:43 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+/*Synopsis:
+	Find string (needle) in string (haystack) within the legth (len) given
+Description:
+	-If needle is an empty string, haystack is returned;
+	-if needle occurs nowhere in haystack or NULL is returned; 
+	-otherwise a pointer to the first character of the first occurrence
+	 	of needle is returned. Iflen is too short, NULL is returned 
+*/
 #include "libft.h"
 
-static int	my_cmp(const char *str1, const char *str2, size_t n);
-
-char	*ft_strnstr(const char *str, const char *find, size_t size)
+/*1.check if needle is empty string
+	2.start looking and moving through haystack 1-by-1
+	3.Checking whether needle is like haystack and moving through the whole line
+	4.Check that needle was found and return pointer to first occurrence of 
+		needle in haystack
+	5. len too short or needle not found: return NULL
+*/
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	if (!*find)
-		return ((char *) str);
-	if (size == 0)
-		return (NULL);
-	while (size > 0 && *str)
-	{
-		if (my_cmp(str, find, size))
-			return ((char *) str);
-		str++;
-		size--;
-	}
-	return (0);
-}
+	size_t	ind1;
+	size_t	ind2;
 
-static int	my_cmp(const char *str1, const char *str2, size_t n)
-{
-	while (*str1 && *str2 && n > 0)
+	if (*needle == 0)
 	{
-		if (*str1++ != *str2++)
-			return (0);
-		n--;
+		return ((char *)(haystack));
 	}
-	if (*str2)
-		return (0);
-	return (1);
+	ind1 = 0;
+	ind2 = 0;
+	while (ind1 < len && haystack[ind1])
+	{
+		while (*(unsigned char *)(haystack + ind1 + ind2) \
+			== *(unsigned char *)(needle + ind2) && needle[ind2] \
+			&& ind1 + ind2 < len)
+		{
+			if (needle[ind2 + 1] == '\0')
+				return ((char *)(haystack + ind1));
+			ind2++;
+		}
+		ind2 = 0;
+		ind1++;
+	}
+	return (NULL);
 }

@@ -3,27 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 20:42:31 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/02/22 20:42:34 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/09/24 14:55:41 by niclaw            #+#    #+#             */
+/*   Updated: 2022/09/24 14:55:56 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *str, int c)
+/*  1.start looking and moving through *s 1-by-1, from the back, until start 
+		of string
+    2.Checking whether c is like str
+    3.c not found return NULL*/
+char	*ft_strrchr(const char *s, int c)
 {
-	char	*buf;
+	int	ind1;
 
-	buf = NULL;
-	while (*str != '\0')
+	ind1 = ft_strlen((char *)s);
+	while (ind1 > 0 && s[ind1] != (char)(c))
 	{
-		if (*str == (char) c)
-			buf = (char *) str;
-		str++;
+		ind1--;
 	}
-	if ((char) c == *str)
-		return ((char *) str);
-	return (buf);
+	if (s[ind1] == (char)(c))
+		return ((char *)(s + ind1));
+	return (NULL);
 }

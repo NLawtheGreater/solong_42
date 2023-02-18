@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/27 17:24:00 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/02/27 17:24:02 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/09/30 13:25:31 by niclaw            #+#    #+#             */
+/*   Updated: 2022/09/30 13:25:34 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+/*
+**Synopsis:
+	Counts the number of nodes in a list.
+*/
 #include "libft.h"
 
+/*1.assign start of list to ptr
+**2.cycle through node pointer with linker, while counting
+**3.return count
+*/
 int	ft_lstsize(t_list *lst)
 {
+	t_list	*ptr;
 	int		i;
 
-	i = 1;
-	if (lst == NULL)
+	if (!lst)
 		return (0);
-	while (lst->next != NULL)
+	ptr = lst;
+	i = 0;
+	while (ptr != NULL)
 	{
-		lst = lst->next;
+		ptr = ptr->next;
 		i++;
 	}
 	return (i);

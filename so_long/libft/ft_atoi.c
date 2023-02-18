@@ -3,31 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 13:06:01 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/02/22 13:12:25 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/09/02 16:11:58 by niclaw            #+#    #+#             */
+/*   Updated: 2022/09/02 16:12:13 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
+#include <stdio.h>
 
-int	ft_atoi(const char *nb)
+static int	overlength(int negcount, const char *str, int i, long long sigma)
 {
-	int	prefix;
-	int	number;
-
-	number = 0;
-	if (*nb == '\0' || *nb == '\e')
+	if ((negcount == -1) && ((sigma > (9223372036854775807 / 10))
+			|| (sigma == (9223372036854775807 / 10) && str[i] - '0' > 8)))
 		return (0);
-	while (*nb <= 32)
-		nb++;
-	if (*nb == '-')
-		prefix = -1;
-	else
-		prefix = 1;
-	if (*nb == '-' || *nb == '+')
-		nb++;
-	while (ft_isdigit(*nb))
-		number = (number * 10) + (*nb++ - '0');
-	return (prefix * number);
+	else if ((negcount == 1) && ((sigma > (9223372036854775807 / 10))
+			|| (sigma == (9223372036854775807 / 10) && str[i] - '0' > 7)))
+		return (-1);
+	return (0);
 }
+
+static int	rec_atoi(char *str, int start)
+{
+	long long	sigma;
+	int			negcount;
+
+	if (str[start] == ' ' || (str[start] >= 9 && str[start] <= 13))
+		return (rec_atoi(str, start + 1));
+	negcount = 1;
+	if (str[start] == '+' || str[start] == '-')
+	{
+		if (str[start] == '-')
+			negcount = -1;
+		start++;
+	}
+	sigma = 0;
+	while (str[start] >= '0' && str[start] <= '9')
+	{
+		if (sigma > (9223372036854775807 / 10) || (sigma == \
+			(9223372036854775807 / 10) && str[start] - '0' > 7))
+			return (overlength(negcount, str, start, sigma));
+		sigma = (str[start] - '0') + (sigma * 10);
+		start++;
+	}
+	return (negcount * sigma);
+}
+
+int	ft_atoi(char *str)
+{
+	return (rec_atoi(str, 0));
+}
+
+/*int	ft_atoi(char *str);
+int	main()
+{
+	int result = ft_atoi("\t 344dfgdf_-+");
+	printf("%d\n", result);
+	result = ft_atoi("    -3488dfgf9-34787 ");
+	printf("%d\n", result);
+	result = ft_atoi("  +-  2344 344  ");
+	printf("%d\n", result);
+
+	return(0);
+}*/

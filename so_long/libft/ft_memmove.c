@@ -3,33 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 15:44:44 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/02/22 15:44:46 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/09/02 17:15:27 by niclaw            #+#    #+#             */
+/*   Updated: 2022/09/02 17:15:29 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+/*Synopsis:
+	Copies len character from src to dst, through an intermediate
+Description:
+	memcpy() simply copies data one by one from one location to another. 
+	On the other hand memmove() copies the data first to an intermediate buffer, 
+	then from the buffer to destination.
+memcpy() leads to problems when strings overlap.*/
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+/*for (ind = 0; ind < len; ind++)
+		*temp[ind] = *(char *)(src + ind);
+	for (ind = 0; ind < len; ind++)
+1. Copy data from src[] to temp[]
+2. Copy data from temp[] to dst[]*/
+		//temp[ind] = *(char *)(src + ind);
+		//*(char *)(dst + ind) = temp[ind];
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*cdest;
-	char	*csrc;
+	char	*d;
+	char	*s;
 
-	cdest = (char *) dest;
-	csrc = (char *) src;
-	if (cdest == csrc || n == 0)
-		return (dest);
-	if (cdest < csrc)
-		while (n-- > 0)
-			*cdest++ = *csrc++;
+	d = (char *)dst;
+	s = (char *)src;
+	if (src < dst)
+		while (len--)
+			d[len] = s[len];
 	else
-	{
-		cdest = cdest + n - 1;
-		csrc = csrc + n - 1;
-		while (n-- > 0)
-			*cdest-- = *csrc--;
-	}
-	return (dest);
+		while (len--)
+			*d++ = *s++;
+	return (dst);
 }

@@ -1,19 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/27 16:53:27 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/02/27 16:53:28 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/09/30 13:16:45 by niclaw            #+#    #+#             */
+/*   Updated: 2022/09/30 13:16:48 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+/*Parameter:
+**lst: The address of a pointer to the first link of
+**a list.
+**new: address of a pointer to the node to be added
+**Description:
+    Adds the node ’new’ at the beginning of the list.
+*/
+#include "libft_bonus.h"
 
+/*1.Check pointers, start with new, then lst
+**2.If lst is void, then point *lst (as the pointer to the first link)
+	to new then end.(*check: no need to end new with NULL as 
+	temporary ending of list?)
+**3.Otherwise, Point *new linker to pointer to the first link of list 
+**3.Point *lst (pointer to the first link of the list) to new, 
+**as it is now the first node
+*/
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	new->next = *lst;
-	*lst = new;
+	if (new)
+	{
+		if (!lst)
+		{
+			*lst = new;
+			return ;
+		}
+		new->next = *lst;
+		*lst = new;
+	}
 }

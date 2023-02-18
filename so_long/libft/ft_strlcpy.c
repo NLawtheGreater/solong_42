@@ -3,36 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 16:45:43 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/02/22 16:45:47 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/09/02 17:18:22 by niclaw            #+#    #+#             */
+/*   Updated: 2022/09/02 17:18:24 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-static void	my_cp(char *d, const char *s, size_t n);
-
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	size_t	srclen;
+	unsigned int	i;
+	unsigned int	k;
 
-	srclen = ft_strlen(src);
-	if (size == 0)
-		return (srclen);
-	if (srclen < size)
-		my_cp(dest, src, srclen + 1);
-	else
+	k = ft_strlen(src);
+	i = 0;
+	if (size > 0)
 	{
-		my_cp(dest, src, size - 1);
-		dest[size - 1] = '\0';
+		while (src[i] != '\0' && i < (size - 1))
+		{
+		dst[i] = src[i];
+		i++;
+		}
+	dst[i] = '\0';
 	}
-	return (srclen);
+	return (k);
 }
 
-static	void	my_cp(char *d, const char *s, size_t n)
+/*
+int	main()
 {
-	while (n-- > 0)
-		*d++ = *s++;
-}
+	char	dest[7];
+	char	src[10] = "thank you!";
+	char	dest1[7];
+	char	src1[10] = "thank you!";
+
+	unsigned int	a = ft_strlcpy(dest, src, 7);
+	unsigned int	b = strlcpy (dest1, src1, 7);
+	printf("%u\n%s\n", a, dest);
+	printf("%u\n%s\n", b, dest1);
+}*/

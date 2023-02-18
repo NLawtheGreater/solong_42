@@ -6,7 +6,6 @@ SRCS =	ft_isalnum.c \
 				ft_split.c \
 				ft_strlcat.c \
 				ft_strncmp.c \
-				ft_substr.c \
 				ft_atoi.c \
 				ft_isalpha.c \
 				ft_itoa.c \
@@ -34,15 +33,7 @@ SRCS =	ft_isalnum.c \
 				ft_strtrim.c \
 				ft_striteri.c \
 
-BONUS	 =	ft_lstadd_back.c \
-					ft_lstadd_front.c \
-					ft_lstclear.c \
-					ft_lstdelone.c \
-					ft_lstiter.c \
-					ft_lstlast.c \
-					ft_lstmap.c \
-					ft_lstnew.c \
-					ft_lstsize.c
+BONUS	 =	
 
 OBJS = $(SRCS:.c=.o)
 BONUS_OBJS = $(BONUS:.c=.o)

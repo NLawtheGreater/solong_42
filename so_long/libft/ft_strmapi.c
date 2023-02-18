@@ -3,29 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/24 20:54:10 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/02/24 20:54:13 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/09/02 17:18:55 by niclaw            #+#    #+#             */
+/*   Updated: 2022/09/02 17:18:56 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+/* Synopsis:
+    Apply any string(pointer) function to a copy of the string s, 
+	one char at a time, and returning result string 
+** Description:
+    Applies the function ’f’ to each character of the
+    string ’s’, and passing its index as first argument
+    to create a new string (with malloc(3)) resulting
+    from successive applications of ’f’.*/
 #include "libft.h"
 
+/*	1.return NULL, if s or f is NULL
+	2.copy string s to str and check allocation
+	3.apply function f to str with for loop, then return
+*/
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*ns;
-	int		i;
+	unsigned int	i;
+	char			*str;
 
-	ns = malloc(sizeof(char) * ft_strlen(s) + 1);
-	if (!ns)
+	if (!s || !f)
+		return (NULL);
+	str = ft_strdup((char *)s);
+	if (!str)
 		return (NULL);
 	i = 0;
-	while (*s)
+	while (str[i])
 	{
-		ns[i] = f(i, *s++);
+		str[i] = (*f)(i, str[i]);
 		i++;
 	}
-	ns[i] = '\0';
-	return (ns);
+	return (str);
 }
