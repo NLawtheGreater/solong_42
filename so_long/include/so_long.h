@@ -22,15 +22,6 @@
 # include "sprite.h"
 # include "files.h"
 
-# define EXIT_SUCCEED		0
-# define EXIT_FAILURE		1
-# define ERROR_MLX 			1
-# define ERROR_WIN			2
-# define ERROR_FILE_OPEN	10
-# define ERROR_FILE_TYPE	11
-# define ERROR_MAP_INVALID	20
-# define ERROR_IMG	21
-
 # ifdef __linux__
 #  define IS_LINUX 1
 #  define OS "LINUX"
@@ -38,6 +29,16 @@
 #  define IS_LINUX 0
 #  define OS "MAC"
 # endif
+
+# define EXIT_SUCCEED		0
+# define EXIT_FAILURE		1
+# define ERROR_MLX 			1
+# define ERROR_WIN			2
+# define ERROR_FILE_OPEN	10
+# define ERROR_FILE_TYPE	11
+# define ERROR_MAP_INVALID	20
+# define ERROR_IMG			21
+
 
 typedef struct s_vtr
 {
@@ -72,7 +73,6 @@ typedef struct s_sprt
 	int				face;
 	int				item;
 	int				moved;
-	int				animating;
 	struct s_sprt	*next;
 }	t_sprt;
 
@@ -103,7 +103,6 @@ typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
-	int		frame;
 	int		w;
 	int		h;
 	int		bsize;
@@ -114,40 +113,8 @@ typedef struct s_data
 	t_panel	panel;
 }	t_data;
 
-void	load_file(t_data *data, char *filename);
-void	load_map(t_data *data);
-void	load_tiles(t_data *data);
-void	load_panel(t_data *data);
-void	load_score(t_data *data);
-
-void	validate_map(t_data *data);
-int		validate_file_ext(char *filename);
-void	free_map_tiles(t_data *data);
-int		valid_path(t_data *data);
-
-void 	prefill (t_data *tmp, t_data *data);
-void 	fill (t_data *tmp, int y, int x);
-int 	fill_check (t_data *tmp, t_data *data);
-
-void	load_game(t_data *data);
-void	render_game(t_data *data);
-int		close_game(int keycode, t_data *data);
-void	exit_game(t_data *data, int code);
-void	error_game(t_data *data, int code, char *msg);
-
-void	new_player(t_data *data, t_tile t);
-void	new_obj(t_data *data, t_tile t);
-void	new_bg(t_data *data, t_tile t);
-
-void	render_player(t_data *data);
-void	check_object_player(t_data *data, t_tile t);
-void	moving_handling(t_data *data, int dirct);
-
-void	update_score(t_data *data);
-
 t_tile	get_tile(t_data *data, t_vtr v);
-t_tile	random_free_tile(t_data *data, int r, int t);
-int		is_overlap_tile(t_vtr v1, t_vtr v2, int o1, int o2);
+t_tile	new_tile(char type, int x, int y);
 
 t_vtr	set_vtr(int x, int y);
 t_vtr	add_vtr(t_vtr v1, t_vtr v2);
@@ -162,5 +129,36 @@ void	render_sprts_util(t_data *data, t_sprt *s);
 void	render_sprts_fnc_util(t_data *data, t_sprt *s,
 			void (*f)(t_data*, t_sprt*));
 void	free_sprts_util(t_data *data, t_sprt *s);
+
+void	load_file(t_data *data, char *filename);
+void	load_map(t_data *data);
+void	load_tiles(t_data *data);
+void	load_panel(t_data *data);
+void	load_score(t_data *data);
+
+void	validate_map(t_data *data);
+int		validate_file_ext(char *filename);
+void	free_map_tiles(t_data *data);
+int		valid_path(t_data *data);
+
+void 	prefill(t_data *tmp, t_data *data);
+void 	fill(t_data *tmp, int y, int x);
+int 	fill_check(t_data *tmp, t_data *data);
+
+void	load_game(t_data *data);
+void	render_game(t_data *data);
+int		close_game(int keycode, t_data *data);
+void	exit_game(t_data *data, int code);
+void	error_game(t_data *data, int code, char *msg);
+
+void	new_player(t_data *data, t_tile t);
+void	new_obj(t_data *data, t_tile t);
+void	new_bg(t_data *data, t_tile t);
+
+void	render_player(t_data *data);
+void	check_player(t_data *data, t_tile t);
+void	moving_handling(t_data *data, int dirct);
+
+void	update_score(t_data *data);
 
 #endif

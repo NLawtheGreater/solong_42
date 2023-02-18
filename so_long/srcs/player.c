@@ -3,40 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
+/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/28 22:59:11 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/18 19:55:48 by niclaw           ###   ########.fr       */
+/*   Created: 2023/02/18 21:51:04 by niclaw            #+#    #+#             */
+/*   Updated: 2023/02/18 21:51:09 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	moving_handling(t_data *data, int dir)
+{
+	t_tile	nt;
+	t_vtr	mv;
+	t_vtr	nv;
+
+	data->player.face = dir;
+	mv = get_move_vtr(data->player.face, 0);
+	nv = add_vtr(data->player.v, mv);
+	nt = get_tile(data, nv);
+	if (nt.type == '1')
+		return ;
+	data->player.nv = nv;
+	data->player.v = nv;
+	data->player.moved++;
+	check_player(data, nt);
+	printf("Move taken: %d\n", data->player.moved);
+	update_score(data);
+}
+
 void	render_player(t_data *data)
 {
-	/*t_sprt	p;
-
-	p = data->player;
-	if (p.act == ACT_HURTING)
-		player_hurting(data);
-	else if (p.act == ACT_WALK)
-	{
-		player_walking(data);
-	}
-	else if (p.act == ACT_INTERACT)
-		player_interacting(data);
-	else if (p.act == ACT_STAND)
-		player_standing(data);
-	else if (p.act == ACT_COLLECTED)
-		player_collecting(data);
-	else
-		player_switch_acting(data);*/
 	mlx_destroy_image(data->mlx, data->player.img.ptr);
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->player.img.ptr, data->player.v.x, data->player.v.y);
 }
 
-void	check_object_player(t_data *data, t_tile t)
+void	check_player(t_data *data, t_tile t)
 {
 	t_sprt	*obj;
 
@@ -60,26 +63,4 @@ void	check_object_player(t_data *data, t_tile t)
 		if (data->map.item == data->player.item)
 			exit_game(data, EXIT_SUCCEED);
 	}
-}
-
-void	moving_handling(t_data *data, int dir)
-{
-	t_tile	nt;
-	t_vtr	mv;
-	t_vtr	nv;
-
-	data->player.face = dir;
-	mv = get_move_vtr(data->player.face, 0);
-	nv = add_vtr(data->player.v, mv);
-	nt = get_tile(data, nv);
-	if (nt.type == '1')
-		return ;
-	data->player.nv = nv;
-	data->player.v = nv;
-	data->player.moved++;
-	check_object_player(data, nt);
-
-	/*check*/
-	printf("Move taken: %d\n", data->player.moved);
-	update_score(data);
 }

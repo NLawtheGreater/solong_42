@@ -1,3 +1,0 @@
--"libft.h" helps define NULL in return(NULL)?
--Why does malloc(3) as is generally written has a 3 in it?
--sizeof(char) is correct. (sizeof)char is incorrect!

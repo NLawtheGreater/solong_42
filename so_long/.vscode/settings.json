@@ -1,5 +1,6 @@
 {
 	"files.associations": {
-		"keysymdef.h": "c"
+		"keysymdef.h": "c",
+		"so_long.h": "c"
 	}
 }

@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 01:28:30 by tsomsa            #+#    #+#             */
+/*   Created: 2022/01/24 01:28:30 by niclaw            #+#    #+#             */
 /*   Updated: 2023/02/18 20:36:45 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -28,7 +28,6 @@ int	main(int argc, char **argv)
 	data.bsize = TILE_SIZE;
 	initiate(&data, filename);
 	mlx_loop_hook(data.mlx, &render, &data);
-	/*check*/
 	mlx_hook(data.win, X_EVENT_KEY_PRESS, 1L << 0, &keyhandler, &data);
 	mlx_hook(data.win, X_EVENT_KEY_EXIT, 1L << 0, &close_game, &data);
 	mlx_loop(data.mlx);
@@ -71,6 +70,6 @@ static int	keyhandler(int keycode, t_data *data)
 	if (keycode == KEY_UP || keycode == KEY_W)
 		moving_handling(data, DIR_UP);
 	if (keycode == KEY_ESC)
-		exit_game(data, EXIT_SUCCEED);
+		exit_game(data, EXIT_FAILURE);
 	return (0);
 }

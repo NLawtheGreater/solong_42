@@ -12,6 +12,58 @@
 
 #include "so_long.h"
 
+void	add_sprt_list(t_sprt *list, t_sprt *new)
+{
+	t_sprt	*tmp;
+
+	if (!list)
+		list = new;
+	else
+	{
+		tmp = list;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+}
+
+void	render_sprts_util(t_data *data, t_sprt *tmp)
+{
+	while (tmp)
+	{
+		if (tmp->img.ptr)
+			mlx_put_image_to_window(
+				data->mlx, data->win, tmp->img.ptr, tmp->v.x, tmp->v.y);
+		tmp = tmp->next;
+	}
+}
+
+void	render_sprts_fnc_util(t_data *data, t_sprt *tmp,
+	void (*f)(t_data*, t_sprt*))
+{
+	while (tmp)
+	{
+		f(data, tmp);
+		if (tmp->img.ptr)
+			mlx_put_image_to_window(
+				data->mlx, data->win, tmp->img.ptr, tmp->v.x, tmp->v.y);
+		tmp = tmp->next;
+	}
+}
+
+void	free_sprts_util(t_data *data, t_sprt *s)
+{
+	t_sprt	*tmp;
+
+	tmp = s;
+	while (tmp)
+	{
+		if (tmp->img.ptr)
+			mlx_destroy_image(data->mlx, tmp->img.ptr);
+		tmp = tmp->next;
+	}
+}
+
 void	grid_loop_util(t_data *data, void (*f)(t_data*, t_tile))
 {
 	t_tile	t;
@@ -29,57 +81,5 @@ void	grid_loop_util(t_data *data, void (*f)(t_data*, t_tile))
 			gx++;
 		}
 		gy++;
-	}
-}
-
-void	add_sprt_list(t_sprt *list, t_sprt *new)
-{
-	t_sprt	*tmp;
-
-	if (!list)
-		list = new;
-	else
-	{
-		tmp = list;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
-}
-
-void	render_sprts_util(t_data *data, t_sprt *s)
-{
-	while (s)
-	{
-		if (s->img.ptr)
-			mlx_put_image_to_window(
-				data->mlx, data->win, s->img.ptr, s->v.x, s->v.y);
-		s = s->next;
-	}
-}
-
-void	render_sprts_fnc_util(t_data *data, t_sprt *s,
-	void (*f)(t_data*, t_sprt*))
-{
-	while (s)
-	{
-		f(data, s);
-		if (s->img.ptr)
-			mlx_put_image_to_window(
-				data->mlx, data->win, s->img.ptr, s->v.x, s->v.y);
-		s = s->next;
-	}
-}
-
-void	free_sprts_util(t_data *data, t_sprt *s)
-{
-	t_sprt	*tmp;
-
-	tmp = s;
-	while (tmp)
-	{
-		if (tmp->img.ptr)
-			mlx_destroy_image(data->mlx, tmp->img.ptr);
-		tmp = tmp->next;
 	}
 }

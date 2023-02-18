@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 01:46:10 by tsomsa            #+#    #+#             */
+/*   Created: 2022/05/24 01:46:10 by niclaw            #+#    #+#             */
 /*   Updated: 2023/02/18 19:47:28 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -16,7 +16,6 @@ void	load_game(t_data *data)
 {
 	data->objs = NULL;
 	data->bg = NULL;
-	data->frame = 0;
 	grid_loop_util(data, &new_bg);
 	load_panel(data);
 	data->panel.score = NULL;
@@ -44,12 +43,9 @@ void	exit_game(t_data *data, int code)
 	mlx_destroy_image(data->mlx, data->player.img.ptr);
 	if (data->map.filedata)
 		free(data->map.filedata);
-	if (IS_LINUX)
-	{
-		mlx_clear_window(data->mlx, data->win);
-		mlx_destroy_window(data->mlx, data->win);
-		mlx_destroy_display(data->mlx);
-	}
+	mlx_clear_window(data->mlx, data->win);
+	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_display(data->mlx);
 	exit(code);
 }
 
@@ -85,6 +81,6 @@ int	close_game(int keycode, t_data *data)
 	ft_putendl_fd("Close Game\n", 1);
 	(void) data;
 	(void) keycode;
-	exit(0);
+	exit_game(data, EXIT_FAILURE);
 	return (0);
 }

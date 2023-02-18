@@ -59,7 +59,7 @@ else
 				  -I$(PRINT_DIR)\
 				  -I$(MLX_DIR)
 	LIBS		= -L$(LIB_DIR) -lft\
-				-L$(PRINT_DIR) -lftprintf
+	
 endif
 
 ### SOURCE FILE ###
@@ -112,6 +112,14 @@ MSG = "Upload to git"
 
 
 ### RULES ###
+.c.o:	build ${SRCS} 
+	@mkdir -p ${addprefix ${BUILD}, ${SRC_DIR}}
+	@mkdir -p ${addprefix ${BUILD}, ${SRC_DIR}/utils}
+	@mkdir -p ${addprefix ${BUILD}, ${SHARE_DIR}}
+	@mkdir -p ${addprefix ${BUILD}, ${BONUS_DIR}}
+	@echo "Build done!"
+	${CC} ${CFLAGS} $(INCLUDES) \
+	 -c $< -o ${addprefix ${BUILD}, ${<:.c=.o}}
 	
 build: 
 	@mkdir -p ${addprefix ${BUILD}, ${SRC_DIR}}
@@ -120,16 +128,12 @@ build:
 	@mkdir -p ${addprefix ${BUILD}, ${BONUS_DIR}}
 	@echo "Build done!"
 	
-.c.o:	build ${SRCS} 
-	${CC} ${CFLAGS} $(INCLUDES) \
-	 -c $< -o ${addprefix ${BUILD}, ${<:.c=.o}}
 
 ${NAME}:	${OBJS} ${SHARE_OBJS} ${LIB_DIR} $(MLX_DIR)
 	make -C ${LIB_DIR}
 	make -C ${MLX_DIR}	 
-	make -C ${PRINT_DIR}	 
 	${CC} ${CFLAGS} ${addprefix ${BUILD}, ${OBJS}} ${addprefix ${BUILD}, ${SHARE_OBJS}}\
-	 $(PRINT_DIR)libftprintf.a ${LIBS} $(MLX_FLAGS) -o ${NAME}
+	 ${LIBS} $(MLX_FLAGS) -o ${NAME}
 	@echo "$(GREEN) $@ Linking done!$(NOC)" 
 
 

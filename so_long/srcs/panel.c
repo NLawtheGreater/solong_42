@@ -28,7 +28,8 @@ void	load_panel(t_data *data)
 	data->panel.v.x = 0;
 	data->panel.v.y = data->map.height;
 	data->panel.bg = NULL;
-	mlx_string_put(data->mlx, data->win, data->panel.v.x + 10, data->panel.v.y + 20, 0x8B008B,"Sprites by trevor-pupkin.itch.io");
+	mlx_string_put(data->mlx, data->win, data->panel.v.x + 10, \
+		data->panel.v.y + 20, 0x8B008B, "Sprites by trevor-pupkin.itch.io");
 }
 
 void	load_score(t_data *data)
@@ -39,6 +40,23 @@ void	load_score(t_data *data)
 	i = 0;
 	while (i < 4)
 		init_number(data, i++);
+}
+
+static void	init_number(t_data *data, int i)
+{
+	int		sx;
+	t_sprt	*s;
+
+	sx = data->w - SCORE_LEN * data->bsize;
+	s = malloc(sizeof(t_sprt));
+	s->v.x = sx + i * data->bsize;
+	s->v.y = data->map.height;
+	s->img = get_number_img(data, '0', NULL);
+	s->next = NULL;
+	if (!data->panel.score)
+		data->panel.score = s;
+	else
+		add_sprt_list(data->panel.score, s);
 }
 
 void	update_score(t_data *data)
@@ -66,21 +84,4 @@ void	update_score(t_data *data)
 		s = s->next;
 	}
 	free(txt);
-}
-
-static void	init_number(t_data *data, int i)
-{
-	int		sx;
-	t_sprt	*s;
-
-	sx = data->w - SCORE_LEN * data->bsize;
-	s = malloc(sizeof(t_sprt));
-	s->v.x = sx + i * data->bsize;
-	s->v.y = data->map.height;
-	s->img = get_number_img(data, '0', NULL);
-	s->next = NULL;
-	if (!data->panel.score)
-		data->panel.score = s;
-	else
-		add_sprt_list(data->panel.score, s);
 }

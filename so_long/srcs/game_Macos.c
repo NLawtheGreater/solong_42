@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlaw <nlaw@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 01:46:10 by tsomsa            #+#    #+#             */
+/*   Created: 2022/01/24 01:46:10 by nlaw              #+#    #+#             */
 /*   Updated: 2023/02/14 20:08:33 by nlaw             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -16,7 +16,6 @@ void	load_game(t_data *data)
 {
 	data->objs = NULL;
 	data->bg = NULL;
-	data->frame = 0;
 	grid_loop_util(data, &new_bg);
 	load_panel(data);
 	load_score(data);
@@ -31,8 +30,6 @@ void	render_game(t_data *data)
 	render_sprts_util(data, data->panel.score);
 	render_sprts_util(data, data->objs);
 	render_player(data);
-	/*check*/
-	//mlx_string_put(data->mlx, data->win, 0, 0, 0x0FFF, "SO_LONG");
 }
 
 void	exit_game(t_data *data, int code)
@@ -59,7 +56,7 @@ void	error_game(t_data *data, int code, char *msg)
 		data->mlx = NULL;
 		exit(1);
 	}
-	else if (code == ERROR_MAP_INVALID || ERROR_IMG)
+	else if (code == ERROR_MAP_INVALID || code == ERROR_IMG)
 		ft_putendl_fd("Error: %s\n", 1);
 	else if (code == ERROR_WIN)
 	{
@@ -76,9 +73,8 @@ void	error_game(t_data *data, int code, char *msg)
 int	close_game(int keycode, t_data *data)
 {
 	(void) data;
-	exit_game(data, EXIT_SUCCEED);
-	//ft_putendl_fd("Close Game\n", 1);
-	//(void) keycode;
-	//exit(0);
+	(void) keycode;
+	ft_putendl_fd("Close Game\n", 1);
+	exit_game(data, EXIT_FAILURE);
 	return (0);
 }
