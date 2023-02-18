@@ -29,6 +29,7 @@
 # define ERROR_FILE_OPEN	10
 # define ERROR_FILE_TYPE	11
 # define ERROR_MAP_INVALID	20
+# define ERROR_IMG	21
 
 # ifdef __linux__
 #  define IS_LINUX 1

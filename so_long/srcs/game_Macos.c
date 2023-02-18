@@ -59,7 +59,7 @@ void	error_game(t_data *data, int code, char *msg)
 		data->mlx = NULL;
 		exit(1);
 	}
-	else if (code == ERROR_MAP_INVALID)
+	else if (code == ERROR_MAP_INVALID || ERROR_IMG)
 		ft_putendl_fd("Error: %s\n", 1);
 	else if (code == ERROR_WIN)
 	{
@@ -75,9 +75,10 @@ void	error_game(t_data *data, int code, char *msg)
 
 int	close_game(int keycode, t_data *data)
 {
-	ft_putendl_fd("Close mainGame\n", 1);
 	(void) data;
-	(void) keycode;
-	exit(0);
+	exit_game(data, EXIT_SUCCEED);
+	//ft_putendl_fd("Close Game\n", 1);
+	//(void) keycode;
+	//exit(0);
 	return (0);
 }

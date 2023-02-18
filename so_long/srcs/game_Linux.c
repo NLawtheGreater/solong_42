@@ -62,7 +62,7 @@ void	error_game(t_data *data, int code, char *msg)
 		data->mlx = NULL;
 		exit(1);
 	}
-	else if (code == ERROR_MAP_INVALID)
+	else if (code == ERROR_MAP_INVALID || ERROR_IMG)
 	{
 		ft_putstr_fd("Error: ", 1);
 		ft_putendl_fd(msg, 1);
@@ -71,7 +71,7 @@ void	error_game(t_data *data, int code, char *msg)
 	{
 		ft_putendl_fd("Error: Cannot run MLX WIN", 1);
 		free(data->win);
-	free_map_tiles(data);
+		free_map_tiles(data);
 	}
 	free(data->mlx);
 	data->mlx = NULL;

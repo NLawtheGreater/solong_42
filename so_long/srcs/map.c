@@ -19,7 +19,6 @@ static t_tile	new_tile(char type, int x, int y)
 	t_tile	tile;
 
 	tile.type = type;
-	/*check*/
 	tile.v.x = x;
 	tile.v.y = y;
 	return (tile);

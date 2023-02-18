@@ -17,13 +17,18 @@ t_img	set_img(t_data *data, char *path)
 	t_img	img;
 	char	*dir;
 	char	*fpath;
+	
 
 	if (TILE_SIZE == 32)
 		dir = "asset/sprites_32/";
 	else
 		dir = "asset/sprites_64/";
 	fpath = ft_strjoin(dir, path);
+	//img.w = TILE_SIZE;
+	//img.h = TILE_SIZE;
 	img.ptr = mlx_xpm_file_to_image(data->mlx, fpath, &img.w, &img.h);
+	if (!img.ptr)
+		error_game(data, ERROR_WIN, "image error");
 	free(fpath);
 	return (img);
 }
