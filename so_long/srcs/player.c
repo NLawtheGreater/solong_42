@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 21:51:04 by niclaw            #+#    #+#             */
-/*   Updated: 2023/02/18 22:27:23 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/19 00:27:57 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	moving_handling(t_data *data, int dir)
 	data->player.v = nv;
 	data->player.moved++;
 	check_player(data, nt);
-	ft_putstr_fd("Move taken:", 1);
-	ft_putendl_fd(data->player.moved, 1);
+	ft_putstr_fd("\nMove taken:", 1);
+	ft_putnbr_fd(data->player.moved, 1);
 	update_score(data);
 }
 
