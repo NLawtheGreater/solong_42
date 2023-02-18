@@ -6,7 +6,7 @@
 #    By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/24 13:59:17 by niclaw            #+#    #+#              #
-#    Updated: 2023/02/19 00:02:29 by niclaw           ###   ########.fr        #
+#    Updated: 2023/02/19 00:56:04 by niclaw           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -166,10 +166,10 @@ re:	fclean all
 test2:
 
 mem:	
-	leaks --atExit -- ./$(NAME) $(MAP)
-#valgrind --leak-check=full  --show-leak-kinds=definite ./$(NAME) $(MAP)
+#leaks --atExit -- ./$(NAME) $(MAP)
+	valgrind --leak-check=full  --show-leak-kinds=all ./$(NAME) $(MAP)
 
-MAP =
+MAP = "test5.ber"
 
 tester:
 
