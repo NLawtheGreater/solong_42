@@ -41,11 +41,13 @@ void	exit_game(t_data *data, int code)
 	free_sprts_util(data, data->panel.bg);
 	free_sprts_util(data, data->panel.score);
 	mlx_destroy_image(data->mlx, data->player.img.ptr);
+	free(data->win);
 	if (data->map.filedata)
 		free(data->map.filedata);
 	mlx_clear_window(data->mlx, data->win);
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_display(data->mlx);
+	free(data->mlx);
 	exit(code);
 }
 
@@ -67,15 +69,15 @@ void	error_game(t_data *data, int code, char *msg)
 	else if (code == ERROR_WIN)
 	{
 		ft_putendl_fd("Error: Cannot run MLX WIN", 1);
+		mlx_clear_window(data->mlx, data->win);
+		mlx_destroy_window(data->mlx, data->win);
 		free(data->win);
 		free_map_tiles(data);
 	}
+	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	data->mlx = NULL;
 	free(data->map.filedata);
-	/*mlx_clear_window(data->mlx, data->win);
-	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_display(data->mlx);*/
 	exit(1);
 }
 
