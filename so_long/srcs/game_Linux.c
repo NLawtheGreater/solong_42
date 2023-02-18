@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 01:46:10 by niclaw            #+#    #+#             */
-/*   Updated: 2023/02/18 22:35:31 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/19 00:00:20 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ void	error_game(t_data *data, int code, char *msg)
 	free(data->mlx);
 	data->mlx = NULL;
 	free(data->map.filedata);
+	/*mlx_clear_window(data->mlx, data->win);
+	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_display(data->mlx);*/
 	exit(1);
 }
 

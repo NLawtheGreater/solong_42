@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlaw <nlaw@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 23:36:09 by niclaw            #+#    #+#             */
-/*   Updated: 2023/02/13 20:32:01 by nlaw             ###   ########.fr       */
+/*   Updated: 2023/02/18 23:58:33 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 static int	valid_wall(t_map map);
-
-int	valid_path(t_data *data)
+static void	find_p(t_data *data, int *pos)
 {
-	t_data	tmp;
-	int		x;
-	int		y;
+	int	y;
+	int	x;
 
 	y = 0;
 	while (y < data->map.grid_y)
@@ -28,17 +26,36 @@ int	valid_path(t_data *data)
 		{
 			if (data->map.tiles[y][x].type == 'P')
 			{
-				prefill (&tmp, data);
-				fill (&tmp, y, x);
-				if (fill_check (&tmp, data) == 0)
-					return (0);
-				else
-					return (1);
+				pos[0] = y;
+				pos[1] = x;
 			}
 			x++;
 		}
 		y++;
 	}
+	return ;
+}
+
+int	valid_path(t_data *data)
+{
+	t_data	tmp;
+	t_data  *ptr;
+	int		pos[2];
+
+	find_p(data, pos);
+	
+				prefill (&tmp, data);
+				fill (&tmp, pos[0], pos[1]);
+				if (fill_check (&tmp, data) == 0)
+				{
+					free_map_tiles(&tmp);
+					return (0);
+				}
+				else
+				{
+					free_map_tiles(&tmp);
+					return (1);
+				}
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 21:31:38 by niclaw            #+#    #+#             */
-/*   Updated: 2023/02/18 21:31:45 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/18 23:40:12 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ int	fill_check(t_data *tmp, t_data *data)
 		}
 		y++;
 	}
-	free_map_tiles(tmp);
+	int		gy;
 	return (1);
 }

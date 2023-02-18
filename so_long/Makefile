@@ -6,7 +6,7 @@
 #    By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/24 13:59:17 by niclaw            #+#    #+#              #
-#    Updated: 2023/02/18 19:55:03 by niclaw           ###   ########.fr        #
+#    Updated: 2023/02/19 00:02:29 by niclaw           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ TESTER3		=
 TESTER4		=
 
 ### SO_LONG SPECIAL ###
-MAP = 
+
 UNAME = $(shell uname -s)
 ifeq ($(UNAME), Linux)
 	PLATFORM_SRC = game_Linux.c
@@ -166,8 +166,10 @@ re:	fclean all
 test2:
 
 mem:	
-	valgrind -s --leak-check=summary --show-leak-kinds=all ./$(NAME) $(MAP)
+	valgrind --leak-check=full  ./$(NAME) $(MAP)
 #--show-leak-kinds=all
+MAP = 
+
 tester:
 
 norm:
