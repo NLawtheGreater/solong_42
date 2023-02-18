@@ -167,8 +167,9 @@ test2:
 
 mem:	
 	valgrind --leak-check=full  ./$(NAME) $(MAP)
+	leaks --atExit -- ./$(NAME) $(MAP)
 #--show-leak-kinds=all
-MAP = 
+MAP = "test1.ber"
 
 tester:
 
