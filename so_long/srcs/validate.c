@@ -39,7 +39,6 @@ static void	find_p(t_data *data, int *pos)
 int	valid_path(t_data *data)
 {
 	t_data	tmp;
-	t_data  *ptr;
 	int		pos[2];
 
 	find_p(data, pos);

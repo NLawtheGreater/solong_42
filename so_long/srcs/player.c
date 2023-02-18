@@ -28,7 +28,8 @@ void	moving_handling(t_data *data, int dir)
 	data->player.v = nv;
 	data->player.moved++;
 	check_player(data, nt);
-	printf("Move taken: %d\n", data->player.moved);
+	ft_putstr_fd("Move taken:", 1);
+	ft_putendl_fd(data->player.moved, 1);
 	update_score(data);
 }
 

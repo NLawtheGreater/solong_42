@@ -94,7 +94,7 @@ PRINT	= ${PRINT_DIR}libftprintf.a
 # the compilation flag that will we will use for the project
 
 CC	= gcc
-CFLAGS	= -g -Wall -Wextra
+CFLAGS	= -g -Wall -Wextra -Wextra
 RM	= rm -f
 
 ### COLORS ###
