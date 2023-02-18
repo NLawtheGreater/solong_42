@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_Macos.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nlaw <nlaw@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 01:46:10 by nlaw              #+#    #+#             */
-/*   Updated: 2023/02/14 20:08:33 by nlaw             ###   ########.fr       */
+/*   Updated: 2023/02/19 01:37:00 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	exit_game(t_data *data, int code)
 	mlx_destroy_image(data->mlx, data->player.img.ptr);
 	mlx_clear_window(data->mlx, data->win);
 	mlx_destroy_window(data->mlx, data->win);
-	free(data->win);
 	free_map_tiles(data);
 	if (data->map.filedata)
 		free(data->map.filedata);
@@ -65,9 +64,8 @@ void	error_game(t_data *data, int code, char *msg)
 	else if (code == ERROR_WIN)
 	{
 		ft_putendl_fd("Error: Cannot run MLX WIN\n", 1);
-		/*mlx_clear_window(data->mlx, data->win);
-		mlx_destroy_window(data->mlx, data->win);*/
-		free(data->win);
+		mlx_clear_window(data->mlx, data->win);
+		mlx_destroy_window(data->mlx, data->win);
 		free_map_tiles(data);
 	}
 	free(data->mlx);

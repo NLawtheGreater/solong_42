@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 01:46:10 by niclaw            #+#    #+#             */
-/*   Updated: 2023/02/19 01:04:35 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/19 01:36:16 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	render_game(t_data *data)
 
 void	exit_game(t_data *data, int code)
 {
-	ft_putendl_fd("Exit Game", 1);
+	ft_putendl_fd("\nExit Game", 1);
 	free_sprts_util(data, data->bg);
 	free_sprts_util(data, data->objs);
 	free_sprts_util(data, data->panel.bg);
@@ -43,7 +43,6 @@ void	exit_game(t_data *data, int code)
 	mlx_destroy_image(data->mlx, data->player.img.ptr);
 	mlx_clear_window(data->mlx, data->win);
 	mlx_destroy_window(data->mlx, data->win);
-	free(data->win);
 	if (data->map.filedata)
 		free(data->map.filedata);
 	mlx_destroy_display(data->mlx);
@@ -71,7 +70,6 @@ void	error_game(t_data *data, int code, char *msg)
 		ft_putendl_fd("Error: Cannot run MLX WIN", 1);
 		mlx_clear_window(data->mlx, data->win);
 		mlx_destroy_window(data->mlx, data->win);
-		free(data->win);
 		free_map_tiles(data);
 	}
 	mlx_destroy_display(data->mlx);
