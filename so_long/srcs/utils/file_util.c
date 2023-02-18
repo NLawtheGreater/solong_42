@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_util.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niclaw <niclaw@student.42.fr>                  +#+  +:+       +#+    */
+/*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 01:57:34 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/13 20:21:24 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/19 01:02:16 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ static char	*read_file(t_data *data, char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
+	{
+		free (filename);
 		error_game(data, ERROR_FILE_OPEN, "file not found.");
+	}
 	if (!validate_file_ext(filename))
 		error_game(data, ERROR_FILE_OPEN, "file extension is not "".ber""");
 	buf = ft_calloc((BUF_SIZE + 1), sizeof(char));

@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 01:46:10 by niclaw            #+#    #+#             */
-/*   Updated: 2023/02/19 00:00:20 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/19 01:04:35 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	exit_game(t_data *data, int code)
 	free_sprts_util(data, data->panel.bg);
 	free_sprts_util(data, data->panel.score);
 	mlx_destroy_image(data->mlx, data->player.img.ptr);
+	mlx_clear_window(data->mlx, data->win);
+	mlx_destroy_window(data->mlx, data->win);
 	free(data->win);
 	if (data->map.filedata)
 		free(data->map.filedata);
-	mlx_clear_window(data->mlx, data->win);
-	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	exit(code);
