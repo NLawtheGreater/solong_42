@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 01:46:10 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/18 13:40:17 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/18 19:47:28 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	load_game(t_data *data)
 	data->frame = 0;
 	grid_loop_util(data, &new_bg);
 	load_panel(data);
+	data->panel.score = NULL;
 	load_score(data);
 	grid_loop_util(data, &new_obj);
 	grid_loop_util(data, &new_player);

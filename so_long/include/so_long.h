@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 08:13:55 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/18 13:59:37 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/18 19:54:40 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ typedef struct s_map
 	int		item;
 	int		exit;
 	int		player;
-	int		enemy;
 	t_tile	**tiles;
 }	t_map;
 
@@ -108,7 +107,6 @@ typedef struct s_data
 	int		w;
 	int		h;
 	int		bsize;
-	int		n_enemy;
 	t_sprt	*bg;
 	t_sprt	player;
 	t_sprt	*objs;
@@ -144,7 +142,6 @@ void	new_bg(t_data *data, t_tile t);
 void	render_player(t_data *data);
 void	check_object_player(t_data *data, t_tile t);
 void	moving_handling(t_data *data, int dirct);
-void	player_move(t_data *data);
 
 void	update_score(t_data *data);
 

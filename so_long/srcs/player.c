@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 22:59:11 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/18 13:54:31 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/18 19:55:48 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,4 @@ void	moving_handling(t_data *data, int dir)
 	/*check*/
 	printf("Move taken: %d\n", data->player.moved);
 	update_score(data);
-	player_move(data);
-}
-
-void	player_move(t_data *data)
-{
-	t_sprt	p;
-	t_vtr	mv;
-
-	p = data->player;
-	mv = get_move_vtr(p.face, 1);
-	data->player.v = add_vtr(data->player.v, mv);
 }

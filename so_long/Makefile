@@ -6,7 +6,7 @@
 #    By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/24 13:59:17 by niclaw            #+#    #+#              #
-#    Updated: 2023/02/18 14:29:46 by niclaw           ###   ########.fr        #
+#    Updated: 2023/02/18 19:55:03 by niclaw           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ endif
 # SHARE is for .c file that your mandatory and bonus use. LIBFT is where your specific libft .c file go.
 
 SRC	=	$(PLATFORM_SRC) fill.c init.c main.c map.c panel.c player.c\
-		player_mov.c validate.c utils/file_util.c utils/game_util.c\
+		validate.c utils/file_util.c utils/game_util.c\
 		utils/img_util.c utils/tile_util.c utils/vector_util.c 
 
 BONUS	=	
@@ -162,7 +162,7 @@ re:	fclean all
 test2:
 
 mem:	
-	valgrind -s --leak-check=full --show-leak-kinds=all ./$(NAME) $(MAP)
+	valgrind -s --leak-check=summary --show-leak-kinds=all ./$(NAME) $(MAP)
 #--show-leak-kinds=all
 tester:
 
