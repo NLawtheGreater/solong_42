@@ -27,4 +27,5 @@
 # define OBJECT_GRASS_PATH			"grass.xpm"
 # define OBJECT_EXIT_PATH			"boat.xpm"
 # define SPRITE_STAND_PATH			"player.xpm"
+
 #endif

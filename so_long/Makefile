@@ -166,10 +166,10 @@ re:	fclean all
 test2:
 
 mem:	
-#leaks --atExit -- ./$(NAME) $(MAP)
-	valgrind --leak-check=full  --show-leak-kinds=all ./$(NAME) $(MAP)
+	leaks --atExit -- ./$(NAME) $(MAP)
+#valgrind --leak-check=full  --show-leak-kinds=all ./$(NAME) $(MAP)
 
-MAP = "test10.ber"
+MAP = "test4.ber"
 
 tester:
 

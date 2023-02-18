@@ -76,7 +76,6 @@ void	error_game(t_data *data, int code, char *msg)
 	}
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
-	data->mlx = NULL;
 	free(data->map.filedata);
 	exit(1);
 }

@@ -67,6 +67,7 @@ int	fill_check(t_data *tmp, t_data *data)
 {
 	int		x;
 	int		y;
+	int		gy;
 
 	y = 0;
 	while (y < data->map.grid_y)
@@ -81,6 +82,5 @@ int	fill_check(t_data *tmp, t_data *data)
 		}
 		y++;
 	}
-	int		gy;
 	return (1);
 }

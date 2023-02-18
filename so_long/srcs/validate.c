@@ -13,6 +13,7 @@
 #include "so_long.h"
 
 static int	valid_wall(t_map map);
+
 static void	find_p(t_data *data, int *pos)
 {
 	int	y;
@@ -42,19 +43,18 @@ int	valid_path(t_data *data)
 	int		pos[2];
 
 	find_p(data, pos);
-	
-				prefill (&tmp, data);
-				fill (&tmp, pos[0], pos[1]);
-				if (fill_check (&tmp, data) == 0)
-				{
-					free_map_tiles(&tmp);
-					return (0);
-				}
-				else
-				{
-					free_map_tiles(&tmp);
-					return (1);
-				}
+	prefill (&tmp, data);
+	fill (&tmp, pos[0], pos[1]);
+	if (fill_check (&tmp, data) == 0)
+	{
+		free_map_tiles(&tmp);
+		return (0);
+	}
+	else
+	{
+		free_map_tiles(&tmp);
+		return (1);
+	}
 	return (0);
 }
 
