@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 01:28:30 by niclaw            #+#    #+#             */
-/*   Updated: 2023/02/18 20:36:45 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/18 22:35:15 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ static int	keyhandler(int keycode, t_data *data)
 	if (keycode == KEY_UP || keycode == KEY_W)
 		moving_handling(data, DIR_UP);
 	if (keycode == KEY_ESC)
-		exit_game(data, EXIT_FAILURE);
+		close_game(data, KEY_ESC);
 	return (0);
 }

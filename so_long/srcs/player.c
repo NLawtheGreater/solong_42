@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niclaw <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 21:51:04 by niclaw            #+#    #+#             */
-/*   Updated: 2023/02/18 21:51:09 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/18 22:27:23 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	moving_handling(t_data *data, int dir)
 
 void	render_player(t_data *data)
 {
-	mlx_destroy_image(data->mlx, data->player.img.ptr);
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->player.img.ptr, data->player.v.x, data->player.v.y);
 }

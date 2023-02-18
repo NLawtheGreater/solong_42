@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 08:13:55 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/18 19:54:40 by niclaw           ###   ########.fr       */
+/*   Created: 2023/02/18 22:38:30 by niclaw            #+#    #+#             */
+/*   Updated: 2023/02/18 22:39:15 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@
 # define ERROR_FILE_TYPE	11
 # define ERROR_MAP_INVALID	20
 # define ERROR_IMG			21
-
 
 typedef struct s_vtr
 {
@@ -141,13 +140,13 @@ int		validate_file_ext(char *filename);
 void	free_map_tiles(t_data *data);
 int		valid_path(t_data *data);
 
-void 	prefill(t_data *tmp, t_data *data);
-void 	fill(t_data *tmp, int y, int x);
-int 	fill_check(t_data *tmp, t_data *data);
+void	prefill(t_data *tmp, t_data *data);
+void	fill(t_data *tmp, int y, int x);
+int		fill_check(t_data *tmp, t_data *data);
 
 void	load_game(t_data *data);
 void	render_game(t_data *data);
-int		close_game(int keycode, t_data *data);
+int		close_game(t_data *data, int keycode);
 void	exit_game(t_data *data, int code);
 void	error_game(t_data *data, int code, char *msg);
 

@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 01:46:10 by niclaw            #+#    #+#             */
-/*   Updated: 2023/02/18 19:47:28 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/18 22:35:31 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	error_game(t_data *data, int code, char *msg)
 		data->mlx = NULL;
 		exit(1);
 	}
-	else if (code == ERROR_MAP_INVALID || ERROR_IMG)
+	else if (code == ERROR_MAP_INVALID || code == ERROR_IMG)
 	{
 		ft_putstr_fd("Error: ", 1);
 		ft_putendl_fd(msg, 1);
@@ -76,7 +76,7 @@ void	error_game(t_data *data, int code, char *msg)
 	exit(1);
 }
 
-int	close_game(int keycode, t_data *data)
+int	close_game(t_data *data, int keycode)
 {
 	ft_putendl_fd("Close Game\n", 1);
 	(void) data;
