@@ -6,7 +6,7 @@
 #    By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/24 13:59:17 by niclaw            #+#    #+#              #
-#    Updated: 2023/02/19 01:03:42 by niclaw           ###   ########.fr        #
+#    Updated: 2023/02/20 22:36:18 by niclaw           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ HEAD		= include/
 SHARE_DIR	= share/
 LIB_DIR		= libft/
 PRINT_DIR	= ft_printf/
-BUILD =	./build/
+BUILD_DIR	= ./build
 
 ### TESTER GIT URL ###
 # add some git url to your makefile to make your evaluator life easier
@@ -82,7 +82,7 @@ SHARE_SRCS	= ${addprefix ${SHARE_DIR}, ${SHARE}}
 
 ### OBJECT FILE ###
 # DO NOT CHANGE
-OBJS		= ${SRCS:.c=.o}
+OBJS		= ${SRCS:%.c=$(BUILD_DIR)/%.o}
 BONUS_OBJS	= ${BONUS_SRCS:.c=.o}
 SHARE_OBJS	= ${SHARE_SRCS:.c=.o}
 
@@ -112,15 +112,22 @@ MSG = "Upload to git"
 
 
 ### RULES ###
-.c.o:	build ${SRCS} 
+$(BUILD_DIR)/%.c.o:	${SRCS}
 	@mkdir -p ${addprefix ${BUILD}, ${SRC_DIR}}
 	@mkdir -p ${addprefix ${BUILD}, ${SRC_DIR}/utils}
 	@mkdir -p ${addprefix ${BUILD}, ${SHARE_DIR}}
 	@mkdir -p ${addprefix ${BUILD}, ${BONUS_DIR}}
 	@echo "Build done!"
 	${CC} ${CFLAGS} $(INCLUDES) \
-	 -c $< -o ${addprefix ${BUILD}, ${<:.c=.o}}
-	
+	 -c $< -o ${BUILD_DIR}/${<:.c=.o}
+
+${NAME}:	${OBJS} ${SHARE_OBJS} ${LIB_DIR} $(MLX_DIR)
+	make -C ${LIB_DIR}
+	make -C ${MLX_DIR}	 
+	${CC} ${CFLAGS} ${OBJS} ${SHARE_OBJS}\
+	 ${LIBS} $(MLX_FLAGS) -o ${NAME}
+	@echo "$(GREEN) $@ Linking done!$(NOC)" 
+		
 build: 
 	@mkdir -p ${addprefix ${BUILD}, ${SRC_DIR}}
 	@mkdir -p ${addprefix ${BUILD}, ${SRC_DIR}/utils}
@@ -128,15 +135,6 @@ build:
 	@mkdir -p ${addprefix ${BUILD}, ${BONUS_DIR}}
 	@echo "Build done!"
 	
-
-${NAME}:	${OBJS} ${SHARE_OBJS} ${LIB_DIR} $(MLX_DIR)
-	make -C ${LIB_DIR}
-	make -C ${MLX_DIR}	 
-	${CC} ${CFLAGS} ${addprefix ${BUILD}, ${OBJS}} ${addprefix ${BUILD}, ${SHARE_OBJS}}\
-	 ${LIBS} $(MLX_FLAGS) -o ${NAME}
-	@echo "$(GREEN) $@ Linking done!$(NOC)" 
-
-
 all: ${NAME}
 
 libs:
@@ -145,7 +143,7 @@ libs:
 	make -C ${PRINT_DIR}
 
 bonus:	${BONUS_OBJS} ${SHARE_OBJS} ${LIBFT}
-	@${CC} ${CFLAGS} ${addprefix ${BUILD}, ${BONUS_OBJS}} ${addprefix ${BUILD}, ${SHARE_OBJS}}\
+	@${CC} ${CFLAGS} ${${BUILD}/${BONUS_OBJS}} ${addprefix ${BUILD}, ${SHARE_OBJS}}\
 	${LIBFT} -o ${BONUS_NAME}
 	@echo "$(GREEN)${BONUS_NAME}$(NOC)"
 
@@ -153,13 +151,13 @@ clean:
 	@echo "$(RED)clean$(NOC)"
 	make clean -C ${LIB_DIR} 
 	make clean -C ${MLX_DIR} 
-	${RM} -r ${BUILD}
+	${RM} -r ${BUILD_DIR}
 
 fclean:	clean
 	@echo "$(RED)fclean$(NOC)"
 	make fclean -C ${LIB_DIR} 
 	make clean -C ${MLX_DIR} 
-	${RM} ${NAME} ${BONUS_NAME}
+	${RM} ${NAME} ${NAME}
 
 re:	fclean all
 

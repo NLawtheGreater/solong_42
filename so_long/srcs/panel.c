@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 22:59:32 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/18 20:54:06 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/20 22:28:36 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ void	update_score(t_data *data)
 	while (i < SCORE_LEN)
 	{
 		if (i == 3 && len >= 1)
-			s->img = get_number_img(data, txt[len - 1], &s->img);
+			s->img = get_number_img(data, txt[len - 1], s);
 		else if (i == 2 && len >= 2)
-			s->img = get_number_img(data, txt[len - 2], &s->img);
+			s->img = get_number_img(data, txt[len - 2], s);
 		else if (i == 1 && len >= 3)
-			s->img = get_number_img(data, txt[len - 3], &s->img);
+			s->img = get_number_img(data, txt[len - 3], s);
 		else if (i == 0 && len == 4)
-			s->img = get_number_img(data, txt[len - 4], &s->img);
+			s->img = get_number_img(data, txt[len - 4], s);
 		i++;
 		s = s->next;
 	}
