@@ -6,7 +6,7 @@
 #    By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/24 13:59:17 by niclaw            #+#    #+#              #
-#    Updated: 2023/02/20 22:36:18 by niclaw           ###   ########.fr        #
+#    Updated: 2023/02/19 01:03:42 by niclaw           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ HEAD		= include/
 SHARE_DIR	= share/
 LIB_DIR		= libft/
 PRINT_DIR	= ft_printf/
-BUILD_DIR	= ./build
+BUILD_DIR =	./build/
 
 ### TESTER GIT URL ###
 # add some git url to your makefile to make your evaluator life easier
@@ -82,7 +82,7 @@ SHARE_SRCS	= ${addprefix ${SHARE_DIR}, ${SHARE}}
 
 ### OBJECT FILE ###
 # DO NOT CHANGE
-OBJS		= ${SRCS:%.c=$(BUILD_DIR)/%.o}
+OBJS		= ${SRCS:%.c=$(BUILD_DIR)%.o}
 BONUS_OBJS	= ${BONUS_SRCS:.c=.o}
 SHARE_OBJS	= ${SHARE_SRCS:.c=.o}
 
@@ -112,29 +112,30 @@ MSG = "Upload to git"
 
 
 ### RULES ###
-$(BUILD_DIR)/%.c.o:	${SRCS}
-	@mkdir -p ${addprefix ${BUILD}, ${SRC_DIR}}
-	@mkdir -p ${addprefix ${BUILD}, ${SRC_DIR}/utils}
-	@mkdir -p ${addprefix ${BUILD}, ${SHARE_DIR}}
-	@mkdir -p ${addprefix ${BUILD}, ${BONUS_DIR}}
-	@echo "Build done!"
-	${CC} ${CFLAGS} $(INCLUDES) \
-	 -c $< -o ${BUILD_DIR}/${<:.c=.o}
-
 ${NAME}:	${OBJS} ${SHARE_OBJS} ${LIB_DIR} $(MLX_DIR)
 	make -C ${LIB_DIR}
 	make -C ${MLX_DIR}	 
 	${CC} ${CFLAGS} ${OBJS} ${SHARE_OBJS}\
-	 ${LIBS} $(MLX_FLAGS) -o ${NAME}
-	@echo "$(GREEN) $@ Linking done!$(NOC)" 
-		
-build: 
-	@mkdir -p ${addprefix ${BUILD}, ${SRC_DIR}}
-	@mkdir -p ${addprefix ${BUILD}, ${SRC_DIR}/utils}
-	@mkdir -p ${addprefix ${BUILD}, ${SHARE_DIR}}
-	@mkdir -p ${addprefix ${BUILD}, ${BONUS_DIR}}
-	@echo "Build done!"
+	${LIBS} $(MLX_FLAGS) -o ${NAME}
+	@echo "$(GREEN) $@ Linking done!$(NOC)"
+
+$(BUILD_DIR)%.o:	%.c 
+	@mkdir -p $(BUILD_DIR)${SRC_DIR}
+	@mkdir -p $(BUILD_DIR)${SRC_DIR}/utils
+	@mkdir -p $(BUILD_DIR)${SHARE_DIR}
+	@mkdir -p $(BUILD_DIR)${BONUS_DIR}
+	${CC} ${CFLAGS} $(INCLUDES) \
+	 -c $< -o $(BUILD_DIR)${<:.c=.o}
 	
+#build: 
+#	@mkdir -p ${addprefix ${BUILD}, ${SRC_DIR}}
+#	@mkdir -p ${addprefix ${BUILD}, ${SRC_DIR}/utils}
+#	@mkdir -p ${addprefix ${BUILD}, ${SHARE_DIR}}
+#	@mkdir -p ${addprefix ${BUILD}, ${BONUS_DIR}}
+#	@echo "Build done!"
+	 
+
+
 all: ${NAME}
 
 libs:
@@ -143,7 +144,7 @@ libs:
 	make -C ${PRINT_DIR}
 
 bonus:	${BONUS_OBJS} ${SHARE_OBJS} ${LIBFT}
-	@${CC} ${CFLAGS} ${${BUILD}/${BONUS_OBJS}} ${addprefix ${BUILD}, ${SHARE_OBJS}}\
+	@${CC} ${CFLAGS} ${addprefix ${BUILD}, ${BONUS_OBJS}} ${addprefix ${BUILD}, ${SHARE_OBJS}}\
 	${LIBFT} -o ${BONUS_NAME}
 	@echo "$(GREEN)${BONUS_NAME}$(NOC)"
 
@@ -157,7 +158,7 @@ fclean:	clean
 	@echo "$(RED)fclean$(NOC)"
 	make fclean -C ${LIB_DIR} 
 	make clean -C ${MLX_DIR} 
-	${RM} ${NAME} ${NAME}
+	${RM} ${NAME} ${BONUS_NAME}
 
 re:	fclean all
 
@@ -167,7 +168,7 @@ mem:
 	leaks --atExit -- ./$(NAME) $(MAP)
 #valgrind --leak-check=full  --show-leak-kinds=all ./$(NAME) $(MAP)
 
-MAP = "test5.be"
+MAP = "test4.ber"
 
 tester:
 
@@ -196,6 +197,8 @@ help:
 	@echo "$(RED)| $(YELLOW)make mem      $(RED)|$(NOC)"
 	@echo "$(RED)==================$(NOC)"
 
+object:
+	@echo $(OBJS)
 .PHONY:	all clean fclean re bonus test t1 t2 mem tester norm name build
 
 # this will add the file dependencies below, i.e. it modifies this file
