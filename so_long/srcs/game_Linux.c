@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 01:46:10 by niclaw            #+#    #+#             */
-/*   Updated: 2023/02/19 01:36:16 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/04/04 20:06:23 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	render_game(t_data *data)
 
 void	exit_game(t_data *data, int code)
 {
-	if (code = 0)
+	if (code == 0)
 		ft_putendl_fd("\nExit Game", 1);
 	free_sprts_util(data, data->bg);
 	free_sprts_util(data, data->objs);

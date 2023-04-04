@@ -6,12 +6,13 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 01:25:08 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/18 14:01:21 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/04/04 20:14:19 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILE_H
-# define FILE_H
+#ifndef  FILES_H
+# define FILES_H
+
 # define TEXT_NUMBER_0				"numbers/0.xpm"
 # define TEXT_NUMBER_1				"numbers/1.xpm"
 # define TEXT_NUMBER_2				"numbers/2.xpm"

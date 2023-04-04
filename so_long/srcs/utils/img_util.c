@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 01:57:25 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/18 19:28:00 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/04/04 20:07:45 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ t_img	get_number_img(t_data *data, char c, t_img *img)
 {
 	if (img)
 	{
-	mlx_destroy_image(data->mlx, img->ptr);
-	img->ptr = NULL;
+		mlx_destroy_image(data->mlx, img->ptr);
+		img->ptr = NULL;
 	}
-	if (c == '0')
-		return (set_img(data, TEXT_NUMBER_0));
 	if (c == '1')
 		return (set_img(data, TEXT_NUMBER_1));
 	if (c == '2')
@@ -57,5 +55,6 @@ t_img	get_number_img(t_data *data, char c, t_img *img)
 		return (set_img(data, TEXT_NUMBER_8));
 	if (c == '9')
 		return (set_img(data, TEXT_NUMBER_9));
-	return (set_img(data, TEXT_NUMBER_0));
+	else
+		return (set_img(data, TEXT_NUMBER_0));
 }
