@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 01:46:10 by nlaw              #+#    #+#             */
-/*   Updated: 2023/02/19 01:37:00 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/19 01:55:10 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	render_game(t_data *data)
 
 void	exit_game(t_data *data, int code)
 {
-	ft_putendl_fd("\nExit Game", 1);
+	if (code = 0)
+		ft_putendl_fd("\nExit Game", 1);
 	free_sprts_util(data, data->bg);
 	free_sprts_util(data, data->objs);
 	free_sprts_util(data, data->panel.bg);
@@ -57,7 +58,7 @@ void	error_game(t_data *data, int code, char *msg)
 	}
 	else if (code == ERROR_MAP_INVALID || code == ERROR_IMG)
 	{
-		ft_putstr_fd("Error:", 1);
+		ft_putstr_fd("\nError:", 1);
 		ft_putstr_fd(msg, 1);
 	}
 	else if (code == ERROR_WIN)
@@ -73,7 +74,7 @@ int	close_game(t_data *data, int keycode)
 {
 	(void) data;
 	(void) keycode;
-	ft_putendl_fd("Close Game\n", 1);
+	ft_putendl_fd("\nClose Game", 1);
 	exit_game(data, EXIT_FAILURE);
 	return (0);
 }

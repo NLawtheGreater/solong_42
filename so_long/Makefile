@@ -124,8 +124,7 @@ $(BUILD_DIR)%.o:	%.c
 	@mkdir -p $(BUILD_DIR)${SRC_DIR}/utils
 	@mkdir -p $(BUILD_DIR)${SHARE_DIR}
 	@mkdir -p $(BUILD_DIR)${BONUS_DIR}
-	${CC} ${CFLAGS} $(INCLUDES) \
-	 -c $< -o $(BUILD_DIR)${<:.c=.o}
+	${CC} ${CFLAGS} $(INCLUDES) -c $< -o $(BUILD_DIR)${<:.c=.o}
 	
 #build: 
 #	@mkdir -p ${addprefix ${BUILD}, ${SRC_DIR}}

@@ -35,7 +35,8 @@ void	render_game(t_data *data)
 
 void	exit_game(t_data *data, int code)
 {
-	ft_putendl_fd("\nExit Game", 1);
+	if (code = 0)
+		ft_putendl_fd("\nExit Game", 1);
 	free_sprts_util(data, data->bg);
 	free_sprts_util(data, data->objs);
 	free_sprts_util(data, data->panel.bg);
@@ -80,7 +81,7 @@ void	error_game(t_data *data, int code, char *msg)
 
 int	close_game(t_data *data, int keycode)
 {
-	ft_putendl_fd("Close Game\n", 1);
+	ft_putendl_fd("\nClose Game", 1);
 	(void) data;
 	(void) keycode;
 	exit_game(data, EXIT_FAILURE);
