@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 22:38:30 by niclaw            #+#    #+#             */
-/*   Updated: 2023/02/20 22:29:17 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/18 22:39:15 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ t_vtr	add_vtr(t_vtr v1, t_vtr v2);
 t_vtr	get_move_vtr(int drct, int msize);
 
 t_img	set_img(t_data *data, char *path);
-t_img	get_number_img(t_data *data, char c, t_sprt *s);
+t_img	get_number_img(t_data *data, char c, t_img *img);
 
 void	grid_loop_util(t_data *data, void (*f)(t_data*, t_tile));
 void	add_sprt_list(t_sprt *list, t_sprt *new);

@@ -6,7 +6,7 @@
 /*   By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 22:59:32 by tsomsa            #+#    #+#             */
-/*   Updated: 2023/02/20 22:28:36 by niclaw           ###   ########.fr       */
+/*   Updated: 2023/02/18 20:54:06 by niclaw           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	init_number(t_data *data, int i)
 	s = malloc(sizeof(t_sprt));
 	s->v.x = sx + i * data->bsize;
 	s->v.y = data->map.height;
-	s->img = get_number_img(data, '0', NULL);
+	s->img = set_img(data, TEXT_NUMBER_0);
 	s->next = NULL;
 	if (!data->panel.score)
 		data->panel.score = s;
@@ -73,13 +73,13 @@ void	update_score(t_data *data)
 	while (i < SCORE_LEN)
 	{
 		if (i == 3 && len >= 1)
-			s->img = get_number_img(data, txt[len - 1], s);
+			s->img = get_number_img(data, txt[len - 1], &s->img);
 		else if (i == 2 && len >= 2)
-			s->img = get_number_img(data, txt[len - 2], s);
+			s->img = get_number_img(data, txt[len - 2], &s->img);
 		else if (i == 1 && len >= 3)
-			s->img = get_number_img(data, txt[len - 3], s);
+			s->img = get_number_img(data, txt[len - 3], &s->img);
 		else if (i == 0 && len == 4)
-			s->img = get_number_img(data, txt[len - 4], s);
+			s->img = get_number_img(data, txt[len - 4], &s->img);
 		i++;
 		s = s->next;
 	}
